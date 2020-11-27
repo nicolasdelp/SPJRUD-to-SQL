@@ -1,4 +1,4 @@
-class Project:
+class Project(Operator):
 
     def __init__(self):
         pass

@@ -1,4 +1,4 @@
-class Difference:
+class Difference(Operator):
 
     def __init__(self):
         pass

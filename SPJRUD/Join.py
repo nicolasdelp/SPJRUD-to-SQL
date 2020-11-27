@@ -1,4 +1,4 @@
-class Join:
+class Join(Operator):
 
     def __init__(self):
         pass

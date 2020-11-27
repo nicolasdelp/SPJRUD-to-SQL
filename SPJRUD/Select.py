@@ -1,7 +1,7 @@
-class Select:
+class Select(Operator):
 
-    def __init__(self):
-        pass
+    def __init__(self, first_attribute, second_attribute, relation): 
+        pass        
 
     def to_SQL(self): #str
         pass

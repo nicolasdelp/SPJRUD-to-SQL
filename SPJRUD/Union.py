@@ -1,4 +1,4 @@
-class Union:
+class Union(Operator):
 
     def __init__(self):
         pass
