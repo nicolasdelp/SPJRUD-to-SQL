@@ -15,6 +15,7 @@ class Attribute:
 
     def set_Type(self, attribute_type):
         type_available = ['TEXT', 'BLOB', 'REAL', 'INTEGER', 'NULL']
+        #TEXT = str & unicode | BLOB = buffer | REAL = float | INTEGER = int & long | NULL = none
 
         if not isinstance(attribute_type, str):
             raise Exception("Le parametre doit etre une chaine de caracteres")
