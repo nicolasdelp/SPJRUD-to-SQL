@@ -1,4 +1,6 @@
-class Union(Operator):
+from Representation.Node import Node
+
+class Union(Node):
 
     def __init__(self):
         pass

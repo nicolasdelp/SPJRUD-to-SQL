@@ -1,4 +1,6 @@
-class Project(Operator):
+from Representation.Node import Node
+
+class Project(Node):
 
     def __init__(self):
         pass

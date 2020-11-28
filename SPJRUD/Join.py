@@ -1,4 +1,6 @@
-class Join(Operator):
+from Representation.Node import Node
+
+class Join(Node):
 
     def __init__(self):
         pass

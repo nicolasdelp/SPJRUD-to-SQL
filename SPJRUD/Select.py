@@ -1,7 +1,9 @@
-class Select(Operator):
+from Representation.Node import Node
 
-    def __init__(self, first_attribute, second_attribute, relation): 
-        pass        
+class Select(Node):
+
+    def __init__(self): 
+        pass  
 
     def to_SQL(self): #str
         pass

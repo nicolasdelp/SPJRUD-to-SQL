@@ -1,4 +1,6 @@
-class Rename(Operator):
+from Representation.Node import Node
+
+class Rename(Node):
 
     def __init__(self):
         pass

@@ -1,4 +1,6 @@
-class Difference(Operator):
+from Representation.Node import Node
+
+class Difference(Node):
 
     def __init__(self):
         pass

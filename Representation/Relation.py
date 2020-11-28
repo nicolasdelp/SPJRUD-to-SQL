@@ -1,6 +1,7 @@
-from Attribute import Attribute
+from Representation.Node import Node
+from Representation.Attribute import Attribute
 
-class Relation:
+class Relation(Node):
 
     def __init__(self, relation_name, list_attributes):
         self.set_Name(relation_name)
