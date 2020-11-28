@@ -3,7 +3,7 @@ from Representation.Node import Node
 class Attribute(Node):
 
     def __init__(self, attribute_name, attribute_type):
-        self.get_Name(attribute_name)
+        self.set_Name(attribute_name)
         self.set_Type(attribute_type)
 
     def set_Name(self, attribute_name):
@@ -29,3 +29,12 @@ class Attribute(Node):
 
     def get_Type(self):
         return self.attribute_type
+
+    def isComparable(self, otherAttribute): #vérifie si 2 attributs sont comparables
+        if not isinstance(otherAttribute, Attribute):
+            raise Exception("Le parametre doit etre du type \'Attribute\'")
+
+        if self.attribute_type != otherAttribute.get_Type():
+            raise Exception("Les deux attributs ne sont pas du meme type -> (" + self.attribute_type + ") != (" + otherAttribute.get_Type + ")")
+
+        return True
