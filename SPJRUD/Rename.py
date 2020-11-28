@@ -1,6 +1,6 @@
-from Representation.Node import Node
+from SPJRUD.SPJRUD import SPJRUD
 
-class Rename(Node):
+class Rename(SPJRUD):
 
     def __init__(self):
         pass

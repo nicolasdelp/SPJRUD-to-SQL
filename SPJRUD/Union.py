@@ -1,6 +1,6 @@
-from Representation.Node import Node
+from SPJRUD.SPJRUD import SPJRUD
 
-class Union(Node):
+class Union(SPJRUD):
 
     def __init__(self):
         pass

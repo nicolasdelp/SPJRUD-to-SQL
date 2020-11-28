@@ -1,7 +1,16 @@
-from SPJRUD import Select
-from Representation import Node
+from SPJRUD.SPJRUD import SPJRUD
+from SPJRUD.Select import Select
+from SPJRUD.Join import Join
 
-x = Select.Select()
+from Representation.Node import Node
 
-if isinstance(x, Node.Node):
+x = Select()
+
+if isinstance(x, Node):
     print("Hello")
+if isinstance(x, SPJRUD):
+    print("World")
+if isinstance(x, Select):
+    print("World")
+if isinstance(x, Join):
+    print("World")

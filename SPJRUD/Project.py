@@ -1,6 +1,6 @@
-from Representation.Node import Node
+from SPJRUD.SPJRUD import SPJRUD
 
-class Project(Node):
+class Project(SPJRUD):
 
     def __init__(self):
         pass

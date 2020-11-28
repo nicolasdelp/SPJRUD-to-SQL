@@ -1,6 +1,6 @@
-from Representation.Node import Node
+from SPJRUD.SPJRUD import SPJRUD
 
-class Difference(Node):
+class Difference(SPJRUD):
 
     def __init__(self):
         pass
