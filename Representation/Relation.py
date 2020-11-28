@@ -3,9 +3,13 @@ from Representation.Attribute import Attribute
 
 class Relation(Node):
 
-    def __init__(self, relation_name, list_attributes):
+    def __init__(self, relation_name, list_attributes, SQL=None):
         self.set_Name(relation_name)
         self.set_Attributes(list_attributes)
+        if SQL != None:
+            self.set_SQL(SQL)
+        else: 
+            self.set_SQL(relation_name)
 
     def set_Name(self, relation_name):
         if not isinstance(relation_name, str):
@@ -28,3 +32,9 @@ class Relation(Node):
 
     def get_Attributes(self):
         return self.list_attributes
+
+    def set_SQL(self, SQL):
+        self.SQL = SQL
+
+    def get_SQL(self):
+        return self.SQL

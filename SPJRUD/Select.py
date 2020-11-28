@@ -16,6 +16,26 @@ class Select(SPJRUD):
         if isinstance(subExpressionLeft, Equal): #si l'expression est une égalité de 2 paramêtres
             self.subExpressionLeft = subExpressionLeft #liste retourné par l'égalitée
             self.subExpressionRight = subExpressionRight #relation sur laquelle on doit travailler
+        
+        self.check_Expression(subExpressionLeft.return_NameList()[0], subExpressionRight) #verifie si l'attribut de gauche de subExpression est bien dans la relation
 
-    def to_SQL(self):
-        return "SELECT * FROM " + self.subExpressionRight.get_Name() + " WHERE " + self.subExpressionLeft.return_List()[0] + '=' + self.subExpressionLeft.return_List()[1]
+        if isinstance(subExpressionLeft.get_AttributeRight(), Attribute): #si l'attribut de droite de subExpression est de type Attribute on verifie si il est dans la relation
+            self.check_Expression(subExpressionLeft.get_AttributeRight().get_Name(), subExpressionRight)
+
+    def check_Expression(self, attributeName, relation):
+        names = []
+        for att in relation.get_Attributes():
+            names.append(att.get_Name())
+        
+        if attributeName not in names:
+            raise Exception("Cet attribut n\'existe pas dans la relation")
+
+    def to_Relation(self):
+        return self.subExpressionRight
+    
+    def print_SQL(self):
+        res = "SELECT * FROM (" + self.subExpressionRight.get_SQL() + ") WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
+        self.subExpressionRight.set_SQL(res)
+
+        res2 = self.to_Relation()
+        print(res2.get_SQL())

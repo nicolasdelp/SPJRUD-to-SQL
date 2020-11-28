@@ -2,7 +2,7 @@ from SPJRUD.SPJRUD import SPJRUD
 
 class Project(SPJRUD):
 
-    def __init__(self):
+    def __init__(self, subExpressionLeft, subExpressionRight):
         pass
 
     def to_SQL(self): #str

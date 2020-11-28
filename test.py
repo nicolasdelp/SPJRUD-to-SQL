@@ -8,19 +8,67 @@ from Representation.Relation import Relation
 
 from Representation.Node import Node
 
+
+#---EQUAL---#
+# a = Constante("Constante")
+# b = Attribute("Attribute", 'TEXT')
+
+# res = Equal(a,b)
+"""
+Exception: Le premier parametre doit etre du type 'Attribute'
+"""
+
+#res = Equal(b, "NotAttributeandNotConsant")
+"""
+Exception: Le deuxieme parametre doit etre du type 'Attribute' ou 'Constante'
+"""
+
+# res = Equal(b,a)
+# for r in res.return_NameList():
+#     print(r)
+"""
+Attribute
+Constante
+"""
+
+# res = Equal(b,b)
+# for r in res.return_NameList():
+#     print(r)
+"""
+Attribute
+Attribute
+"""
+
+
+
+#---SELECT---#
 a = Attribute("Attribute", 'TEXT')
-abis = Attribute("Attribute2", 'TEXT')
-atris = Attribute("Attribute3", 'TEXT')
+b = Attribute("Attribute2", 'TEXT')
+c = Attribute("Attribute3", 'TEXT')
+d = Attribute("Attribute4", 'TEXT')
 
-b = Constante("Nicolas")
-c = Equal(a, Constante("Constante"))
-d = Relation("Relation", [a, abis, atris])
-e = Equal(abis,atris)
+e = Relation("Relation", [a, b, c])
+z = Relation("Relation", [a, b, c])
 
-ni = Select(c,d).to_SQL()
-co = Select(e,d).to_SQL()
-# for z in c:
-#     print(z)
+f = Constante("Constante")
 
-print(ni)
-print(co)
+g = Equal(a, f)
+h = Equal(b, c)
+# i = Equal(d, f)
+"""
+Exception: Cet attribut n'existe pas dans la relation
+"""
+
+res1 = Select(g, e)
+res2 = Select(h, z)
+# res3 = Select(i, e)
+
+res1.print_SQL()
+res2.print_SQL()
+# print(res3.to_SQL())
+
+# ni = Select(c,d).to_SQL()
+# co = Select(e,d).to_SQL()
+
+# print(ni)
+# print(co)
