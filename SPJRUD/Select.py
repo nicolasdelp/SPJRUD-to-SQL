@@ -22,7 +22,7 @@ class Select(SPJRUD):
         if isinstance(subExpressionLeft.get_AttributeRight(), Attribute): #si l'attribut de droite de subExpression est de type Attribute on verifie si il est dans la relation
             self.check_Expression(subExpressionLeft.get_AttributeRight().get_Name(), subExpressionRight)
 
-    def check_Expression(self, attributeName, relation):
+    def check_Expression(self, attributeName, relation): 
         names = []
         for att in relation.get_Attributes():
             names.append(att.get_Name())
@@ -30,10 +30,10 @@ class Select(SPJRUD):
         if attributeName not in names:
             raise Exception("Cet attribut n\'existe pas dans la relation")
 
-    def to_Relation(self):
+    def to_Relation(self): #retourne la relation qui a été "modifié"
         return self.subExpressionRight
     
-    def print_SQL(self):
+    def print_SQL(self): #affiche à la console la requette SQL
         res = "SELECT * FROM (" + self.subExpressionRight.get_SQL() + ") WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
         self.subExpressionRight.set_SQL(res)
 

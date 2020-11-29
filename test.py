@@ -65,10 +65,10 @@ res2 = Select(h, z)
 
 res1.print_SQL()
 res2.print_SQL()
-# print(res3.to_SQL())
+# print(res3.print_SQL())
 
-# ni = Select(c,d).to_SQL()
-# co = Select(e,d).to_SQL()
+res4 = Select(g, res1.to_Relation())
+res4.print_SQL()
 
-# print(ni)
-# print(co)
+res5 = Select(g, res4.to_Relation())
+res5.print_SQL()
