@@ -1,5 +1,6 @@
 from SPJRUD.SPJRUD import SPJRUD
 from SPJRUD.Select import Select
+from SPJRUD.Project import Project
 from SPJRUD.Join import Join
 from Ope.Equal import Equal
 from Representation.Constante import Constante
@@ -63,12 +64,15 @@ res1 = Select(g, e)
 res2 = Select(h, z)
 # res3 = Select(i, e)
 
-res1.print_SQL()
-res2.print_SQL()
+# res1.set_SQL()
+# res2.set_SQL()
 # print(res3.print_SQL())
 
-res4 = Select(g, res1.to_Relation())
-res4.print_SQL()
+# res4 = Select(g, res1.to_Relation())
+# res4.print_SQL()
 
-res5 = Select(g, res4.to_Relation())
-res5.print_SQL()
+# res5 = Select(g, res4.to_Relation())
+# res5.print_SQL()
+
+res6 = Project(['Attribute', 'Attribute2'], res1.get_Relation())
+res6.print_SQL()
