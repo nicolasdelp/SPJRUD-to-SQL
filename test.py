@@ -74,5 +74,13 @@ res2 = Select(h, z)
 # res5 = Select(g, res4.to_Relation())
 # res5.print_SQL()
 
-res6 = Project(['Attribute', 'Attribute2'], res1.get_Relation())
-res6.print_SQL()
+# res6 = Project(['Attribute', 'Attribute2'], res1.get_Relation())
+# res6.print_SQL()
+
+Project(['attribute', 'attribute2'], 
+    Select(Equal(Attribute("attribute", 'TEXT'),f), 
+        Relation("relation", 
+            [Attribute("attribute", 'TEXT'), 
+            Attribute("attribute2", 'TEXT'), 
+            Attribute("attribute3", 'TEXT'), 
+            Attribute("attribute4", 'TEXT')])).get_Relation()).print_SQL()
