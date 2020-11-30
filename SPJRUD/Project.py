@@ -31,9 +31,24 @@ class Project(SPJRUD):
         return self.subExpressionRight
 
     def set_SQL(self):
-        res = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.subExpressionRight.get_SQL() + ")"
+        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
+            res = "SELECT " + ",".join(self.listOfParameters) + " FROM " + self.subExpressionRight.get_SQL()
+        else:
+            res = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.subExpressionRight.get_SQL() + ")"
         self.subExpressionRight.set_SQL(res)
     
+    def clean_SQL(self):
+        element = []
+        for elem in self.listOfParameters:
+            element.append("a." + elem + "=b." + elem)
+        
+        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
+            res = "DELETE a FROM " + self.subExpressionRight.get_SQL() + " AS a, " + self.subExpressionRight.get_SQL() + " AS b WHERE " + " AND ".join(element)
+        else:
+            res = "DELETE a FROM (" + self.subExpressionRight.get_SQL() + ") AS a, (" + self.subExpressionRight.get_SQL() + ") AS b WHERE " + " AND ".join(element)
+        return res
+    
     def print_SQL(self): #affiche à la console la requette SQL
+        print(self.clean_SQL())
         res = self.get_Relation()
         print(res.get_SQL())

@@ -35,8 +35,12 @@ class Select(SPJRUD):
     def get_Relation(self): #retourne la relation qui a été "modifié"
         return self.subExpressionRight
     
-    def set_SQL(self):
-        res = "SELECT * FROM (" + self.subExpressionRight.get_SQL() + ") WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
+    def set_SQL(self): #remove duplicates
+        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
+            res = "SELECT * FROM " + self.subExpressionRight.get_SQL() + " WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
+        else:
+            res = "SELECT * FROM (" + self.subExpressionRight.get_SQL() + ") WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
+
         self.subExpressionRight.set_SQL(res)
     
     def print_SQL(self): #affiche à la console la requette SQL
