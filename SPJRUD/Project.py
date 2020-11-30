@@ -9,13 +9,13 @@ class Project(SPJRUD):
             raise Exception("Le premier parametre doit etre du type \'list\'")
 
         if not isinstance(subExpressionRight, Relation):
-            raise Exception("Le deuxieme parametre doit etre du type \'Relation\'")
+            raise Exception("Le second parametre doit etre du type \'Relation\'")
         
-        self.listOfParameters = listOfParameters #liste retourné par l'égalitée
-        self.subExpressionRight = subExpressionRight #relation sur laquelle on doit travailler
-
         for param in listOfParameters: #verifie si les attributs de la liste sont bien dans la relation
             self.check_Expression(param, subExpressionRight)
+
+        self.listOfParameters = listOfParameters #liste retourné par l'égalitée
+        self.subExpressionRight = subExpressionRight #relation sur laquelle on doit travailler
         
         self.set_SQL()
 

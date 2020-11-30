@@ -11,7 +11,7 @@ class Select(SPJRUD):
             raise Exception("Le premier parametre doit etre du type \'Ope\'")
 
         if not isinstance(subExpressionRight, Relation):
-            raise Exception("Le deuxieme parametre doit etre du type \'Relation\'")
+            raise Exception("Le second parametre doit etre du type \'Relation\'")
         
         if isinstance(subExpressionLeft, Equal): #si l'expression est une égalité de 2 paramêtres
             self.subExpressionLeft = subExpressionLeft #liste retourné par l'égalitée
@@ -19,7 +19,7 @@ class Select(SPJRUD):
         
         self.check_Expression(subExpressionLeft.return_NameList()[0], subExpressionRight) #verifie si l'attribut de gauche de subExpression est bien dans la relation
 
-        if isinstance(subExpressionLeft.get_AttributeRight(), Attribute): #si l'attribut de droite de subExpression est de type Attribute on verifie si il est dans la relation
+        if isinstance(subExpressionLeft.get_AttributeRight(), Attribute): #si l'attribut de droite de subExpressionLeft est du type Attribute on verifie si il est dans la relation subExpressionRight
             self.check_Expression(subExpressionLeft.get_AttributeRight().get_Name(), subExpressionRight)
 
         self.set_SQL()
