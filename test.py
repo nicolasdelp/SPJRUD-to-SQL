@@ -84,3 +84,9 @@ Project(['attribute', 'attribute2'],
             Attribute("attribute2", 'TEXT'), 
             Attribute("attribute3", 'TEXT'), 
             Attribute("attribute4", 'TEXT')])).get_Relation()).print_SQL()
+
+
+firstRel = Relation("firstRel", [a, b, c])
+secondRel = Relation("secondRel", [c, d, a])
+
+Join(firstRel, secondRel).print_SQL()
