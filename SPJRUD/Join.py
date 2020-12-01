@@ -1,6 +1,4 @@
 from SPJRUD.SPJRUD import SPJRUD
-from Ope.Ope import Ope
-from Ope.Equal import Equal
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
 

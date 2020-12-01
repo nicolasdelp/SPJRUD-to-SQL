@@ -2,6 +2,8 @@ from SPJRUD.SPJRUD import SPJRUD
 from SPJRUD.Select import Select
 from SPJRUD.Project import Project
 from SPJRUD.Join import Join
+from SPJRUD.Rename import Rename
+from SPJRUD.Union import Union
 from Ope.Equal import Equal
 from Representation.Constante import Constante
 from Representation.Attribute import Attribute
@@ -90,3 +92,10 @@ firstRel = Relation("firstRel", [a, b, c])
 secondRel = Relation("secondRel", [c, d, a])
 
 Join(firstRel, secondRel).print_SQL()
+
+aze = Equal(b, Constante("Nicolas"))
+Rename(aze, firstRel).print_SQL()
+
+firstRel2 = Relation("firstRel", [a, b, c])
+secondRel2 = Relation("secondRel", [a, b, c])
+Union(firstRel2, secondRel2).print_SQL()
