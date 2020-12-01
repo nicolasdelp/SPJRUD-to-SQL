@@ -14,12 +14,16 @@ class Equal(Ope):
         
         self.attributeLeft = attributeLeft
         self.attributeRight = attributeRight
+        self.sign = " = "
 
     def get_AttributeLeft(self):
         return self.attributeLeft
 
     def get_AttributeRight(self):
         return self.attributeRight
+
+    def get_Sign(self):
+        return self.sign
 
     def return_NameList(self): #retourne une liste pour permettre à l'opérateur du dessus d'agir
         if isinstance(self.attributeRight, Attribute):

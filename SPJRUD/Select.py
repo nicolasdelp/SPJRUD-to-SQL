@@ -4,45 +4,38 @@ from Ope.Equal import Equal
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
 
+from SPJRUD.Validation import *
+
 class Select(SPJRUD):
 
-    def __init__(self, subExpressionLeft, subExpressionRight): 
-        if not isinstance(subExpressionLeft, Ope):
-            raise Exception("Le premier parametre doit etre du type \'Ope\'")
-
-        if not isinstance(subExpressionRight, Relation):
-            raise Exception("Le second parametre doit etre du type \'Relation\'")
+    def __init__(self, subExpressionLeft, subExpressionRight):
+        """
+        Constructeur de l'opérateur Select
+        - subExpressionLeft = une opération entre 2 termes (une égalité par exemple)
+        - subExpressionRight = une relation
+        """
+        valid_Select(subExpressionLeft, subExpressionRight)
         
-        if isinstance(subExpressionLeft, Equal): #si l'expression est une égalité de 2 paramêtres
-            self.subExpressionLeft = subExpressionLeft #liste retourné par l'égalitée
-            self.subExpressionRight = subExpressionRight #relation sur laquelle on doit travailler
-        
-        self.check_Expression(subExpressionLeft.return_NameList()[0], subExpressionRight) #verifie si l'attribut de gauche de subExpression est bien dans la relation
-
-        if isinstance(subExpressionLeft.get_AttributeRight(), Attribute): #si l'attribut de droite de subExpressionLeft est du type Attribute on verifie si il est dans la relation subExpressionRight
-            self.check_Expression(subExpressionLeft.get_AttributeRight().get_Name(), subExpressionRight)
+        self.operation = subExpressionLeft
+        self.relation = subExpressionRight
 
         self.set_SQL()
 
-    def check_Expression(self, attributeName, relation): 
-        names = []
-        for att in relation.get_Attributes():
-            names.append(att.get_Name())
-        
-        if attributeName not in names:
-            raise Exception("Cet attribut n\'existe pas dans la relation")
-
-    def get_Relation(self): #retourne la relation qui a été "modifié"
-        return self.subExpressionRight
+    def get_Relation(self):
+        """
+        Retourne la relation suite aux modifications effectuées
+        """
+        return self.relation
     
-    def set_SQL(self): #remove duplicates
-        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
-            res = "SELECT * FROM " + self.subExpressionRight.get_SQL() + " WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
-        else:
-            res = "SELECT * FROM (" + self.subExpressionRight.get_SQL() + ") WHERE " + self.subExpressionLeft.return_NameList()[0] + '=' + self.subExpressionLeft.return_NameList()[1]
-
-        self.subExpressionRight.set_SQL(res)
+    def set_SQL(self):
+        """
+        Enregistre la requête SQL dans la relation
+        """
+        sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + self.operation.return_NameList()[1]
+        self.relation.set_SQL(sql)
     
-    def print_SQL(self): #affiche à la console la requette SQL
-        res = self.get_Relation()
-        return res.get_SQL()
+    def get_SQL(self):
+        """
+        Retourne la requête SQL de la relation
+        """
+        return self.get_Relation().get_SQL()

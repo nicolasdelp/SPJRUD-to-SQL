@@ -75,7 +75,7 @@ def creat_Database(name):
     #interruption de la connexion
     connection.close()
 
-def print_Database(name):
+def print_Databases(name):
     connection = sqlite3.connect(name + ".db")
     cursor = connection.cursor()
 
@@ -96,21 +96,19 @@ def print_Database(name):
     #interruption de la connexion
     connection.close()
 
-def getAttributesFromTable(name, table) :
-    connection = sqlite3.connect(name + ".db")
+def getAttributesFromTable(databaseName, table) :
+    connection = sqlite3.connect(databaseName + ".db")
     cursor = connection.cursor()
     infos = cursor.execute("PRAGMA table_info(" + table + ");")
     
-    #attributes = []
-    for tup in infos :
-        print(tup)
-        #attributes.append(Attribute(tup[1], tup[2]))
-    
-    #return attributes or False
+    res = []
+    for att in infos:
+        res.append(att[1])
 
-    #interruption de la connexion
     connection.close()
 
+    return res
+
 #creat_Database("database")
-print_Database("database")
-getAttributesFromTable("database", "emp")
+print_Databases("database")
+# print(",".join(getAttributesFromTable("database", "emp")))
