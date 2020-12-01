@@ -45,4 +45,4 @@ class Select(SPJRUD):
     
     def print_SQL(self): #affiche à la console la requette SQL
         res = self.get_Relation()
-        print(res.get_SQL())
+        return res.get_SQL()
