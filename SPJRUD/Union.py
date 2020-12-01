@@ -20,6 +20,9 @@ class Union(SPJRUD):
         for att in firstRelation.get_Attributes():
             attributes.append(att.get_Name())
         
+        if len(firstRelation.get_Attributes()) != len(secondRelation.get_Attributes()):
+            raise Exception("Les deux relations n\'ont pas le meme nombre d\'attributs")
+        
         for att in secondRelation.get_Attributes():
             if att.get_Name() not in attributes:
                 raise Exception("Les deux relation ne sont pas compatible, les attributs ne sont pas les memes")

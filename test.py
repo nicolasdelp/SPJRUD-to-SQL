@@ -4,6 +4,7 @@ from SPJRUD.Project import Project
 from SPJRUD.Join import Join
 from SPJRUD.Rename import Rename
 from SPJRUD.Union import Union
+from SPJRUD.Difference import Difference
 from Ope.Equal import Equal
 from Representation.Constante import Constante
 from Representation.Attribute import Attribute
@@ -99,3 +100,5 @@ Rename(aze, firstRel).print_SQL()
 firstRel2 = Relation("firstRel", [a, b, c])
 secondRel2 = Relation("secondRel", [a, b, c])
 Union(firstRel2, secondRel2).print_SQL()
+
+Difference(firstRel2, secondRel2).print_SQL()
