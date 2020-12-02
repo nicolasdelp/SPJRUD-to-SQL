@@ -4,9 +4,20 @@ from Representation.Constante import Constante
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
 
+from SPJRUD.Validation import *
+
 class Rename(SPJRUD):
 
     def __init__(self, oldName, newName, subExpressionRight):
+        """
+        Constructeur de l'opérateur Select
+        - oldName = le nom de l'attribut cible
+        - newName = le nouveau nom de cet attribut
+        - subExpressionRight = une relation
+
+        >> Rename(oldName, newName, Relation)
+        """
+        valid_Rename(oldName, newName, subExpressionRight)
 
         self.oldName = oldName
         self.newName = newName
@@ -43,6 +54,6 @@ class Rename(SPJRUD):
 
     def get_SQL(self):
         """
-        Retourne la liste des requêtes SQL de la nouvelle relation
+        Retourne la requête SQL de la nouvelle relation
         """
         return self.newRelation.get_SQL()

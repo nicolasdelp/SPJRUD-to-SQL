@@ -46,15 +46,15 @@ Attribute
 
 
 #---SELECT---#
-a = Attribute("Attribute", 'TEXT')
-b = Attribute("Attribute2", 'TEXT')
-c = Attribute("Attribute3", 'TEXT')
-d = Attribute("Attribute4", 'TEXT')
+# a = Attribute("Attribute", 'TEXT')
+# b = Attribute("Attribute2", 'TEXT')
+# c = Attribute("Attribute3", 'TEXT')
+# d = Attribute("Attribute4", 'TEXT')
 
-e = Relation("Relation", [a, b, c])
-z = Relation("Relation", [a, b, c])
+# e = Relation("Relation", [a, b, c])
+# z = Relation("Relation", [a, b, c])
 
-f = Constante("Constante")
+# f = Constante("Constante")
 
 # g = Equal(a, f)
 # h = Equal(b, c)
@@ -80,13 +80,13 @@ Exception: Cet attribut n'existe pas dans la relation
 # res6 = Project(['Attribute', 'Attribute2'], res1.get_Relation())
 # res6.print_SQL()
 
-print(Project(['attribute', 'attribute2'], 
-    Select(Equal("attribute","caca"), 
-        Relation("relation", 
-            [Attribute("attribute", 'TEXT'), 
-            Attribute("attribute2", 'TEXT'), 
-            Attribute("attribute3", 'TEXT'), 
-            Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[0])
+# print(Project(['attribute', 'attribute2'], 
+#     Select(Equal("attribute","caca"), 
+#         Relation("relation", 
+#             [Attribute("attribute", 'TEXT'), 
+#             Attribute("attribute2", 'TEXT'), 
+#             Attribute("attribute3", 'TEXT'), 
+#             Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[0])
 
 print(Project(['attribute', 'attribute2'], 
     Select(Equal("attribute","caca"), 
@@ -94,18 +94,34 @@ print(Project(['attribute', 'attribute2'],
             [Attribute("attribute", 'TEXT'), 
             Attribute("attribute2", 'TEXT'), 
             Attribute("attribute3", 'TEXT'), 
-            Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[1])
+            Attribute("attribute4", 'TEXT')])).get_NewRelation()).get_SQL()[0])
 
-firstRel = Relation("firstRel", [a, b, c])
-secondRel = Relation("secondRel", [c, d, a])
+print(Project(['attribute', 'attribute2'], 
+    Select(Equal("attribute","caca"), 
+        Relation("relation", 
+            [Attribute("attribute", 'TEXT'), 
+            Attribute("attribute2", 'TEXT'), 
+            Attribute("attribute3", 'TEXT'), 
+            Attribute("attribute4", 'TEXT')])).get_NewRelation()).get_SQL()[1])
 
-Join(firstRel, secondRel).print_SQL()
+# print(Project(['attribute', 'attribute2'], 
+#     Select(Equal("attribute","caca"), 
+#         Relation("relation", 
+#             [Attribute("attribute", 'TEXT'), 
+#             Attribute("attribute2", 'TEXT'), 
+#             Attribute("attribute3", 'TEXT'), 
+#             Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[1])
 
-aze = Equal("Attribute2", "Nicolas")
-Rename(aze, firstRel).print_SQL()
+# firstRel = Relation("firstRel", [a, b, c])
+# secondRel = Relation("secondRel", [c, d, a])
 
-firstRel2 = Relation("firstRel", [a, b, c])
-secondRel2 = Relation("secondRel", [a, b, c])
-Union(firstRel2, secondRel2).print_SQL()
+# Join(firstRel, secondRel).print_SQL()
 
-Difference(firstRel2, secondRel2).print_SQL()
+# aze = Equal("Attribute2", "Nicolas")
+# Rename(aze, firstRel).print_SQL()
+
+# firstRel2 = Relation("firstRel", [a, b, c])
+# secondRel2 = Relation("secondRel", [a, b, c])
+# Union(firstRel2, secondRel2).print_SQL()
+
+# Difference(firstRel2, secondRel2).print_SQL()

@@ -7,7 +7,13 @@ from SPJRUD.Validation import *
 class Join(SPJRUD):
 
     def __init__(self, subExpressionLeft, subExpressionRight):
+        """
+        Constructeur de l'opérateur Join
+        - subExpressionLeft = une relation
+        - subExpressionRight = une relation
 
+        >> Join(Relation, Relation)
+        """
         valid_Join(subExpressionLeft, subExpressionRight)
 
         self.firstRelation = subExpressionLeft
@@ -64,6 +70,6 @@ class Join(SPJRUD):
 
     def get_SQL(self):
         """
-        Retourne la liste des requêtes SQL de la nouvelle relation
+        Retourne la requête SQL de la nouvelle relation
         """
         return self.newRelation.get_SQL()

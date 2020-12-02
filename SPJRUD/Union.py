@@ -2,51 +2,47 @@ from SPJRUD.SPJRUD import SPJRUD
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
 
+from SPJRUD.Validation import *
+
 class Union(SPJRUD):
 
     def __init__(self, subExpressionLeft, subExpressionRight):
-        if not isinstance(subExpressionLeft, Relation):
-            raise Exception("Le premier parametre doit etre du type \'Relation\'")
-        if not isinstance(subExpressionRight, Relation):
-            raise Exception("Le second parametre doit etre du type \'Relation\'")
+        """
+        Constructeur de l'opérateur Union
+        - subExpressionLeft = une relation
+        - subExpressionRight = une relation
 
-        self.check_Expression(subExpressionLeft, subExpressionRight) #verifie si la jointure est possible
+        >> Union(Relation, Relation)
+        """
+        valid_Union(subExpressionLeft, subExpressionRight)
+        
+        self.firstRelation = subExpressionLeft
+        self.secondRelation = subExpressionRight
 
-        self.subExpressionLeft = subExpressionLeft #premiere relation
-        self.subExpressionRight = subExpressionRight #deuxieme relation
+        self.set_NewRelation()
+        self.set_SQL()
     
-    def check_Expression(self, firstRelation, secondRelation): 
-        attributes = []
-        for att in firstRelation.get_Attributes():
-            attributes.append(att.get_Name())
-        
-        if len(firstRelation.get_Attributes()) != len(secondRelation.get_Attributes()):
-            raise Exception("Les deux relations n\'ont pas le meme nombre d\'attributs")
-        
-        for att in secondRelation.get_Attributes():
-            if att.get_Name() not in attributes:
-                raise Exception("Les deux relation ne sont pas compatible, les attributs ne sont pas les memes")
-    
-    def get_Relation(self): #retourne la relation qui a été "modifié"
-        res = Relation("UnionRelation", self.subExpressionLeft.get_Attributes())
-        return res
+    def set_NewRelation(self):
+        """
+        Crée une nouvelle relation apres avoir effectuer l'opérateur Union
+        """
+        self.newRelation = Relation("UnionRelation", self.firstRelation.get_Attributes())
 
-    def set_SQL(self, relation):
-        if (self.subExpressionLeft.get_SQL() == self.subExpressionLeft.get_Name()) and (self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name()):
-            res = "(SELECT * FROM " + self.subExpressionLeft.get_Name() + ") UNION (SELECT * FROM " + self.subExpressionRight.get_Name() + ")"
+    def get_NewRelation(self):
+        """
+        Retourne la nouvelle relation
+        """
+        return self.newRelation
 
-        elif (self.subExpressionLeft.get_SQL() != self.subExpressionLeft.get_Name()) and (self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name()):
-            res = "(SELECT * FROM (" + self.subExpressionLeft.get_Name() + ")) UNION (SELECT * FROM " + self.subExpressionRight.get_Name() + ")"
+    def set_SQL(self):
+        """
+        Enregistre la requête SQL dans la nouvelle relation
+        """
+        sql = "(SELECT * FROM (" + self.firstRelation.get_Name() + ")) UNION (SELECT * FROM (" + self.secondRelation.get_Name() + "))"
+        self.newRelation.set_SQL(sql)
 
-        elif (self.subExpressionLeft.get_SQL() == self.subExpressionLeft.get_Name()) and (self.subExpressionRight.get_SQL() != self.subExpressionRight.get_Name()):
-            res = "(SELECT * FROM " + self.subExpressionLeft.get_Name() + ") UNION (SELECT * FROM (" + self.subExpressionRight.get_Name() + "))"
-
-        else:
-            res = "(SELECT * FROM (" + self.subExpressionLeft.get_Name() + ")) UNION (SELECT * FROM (" + self.subExpressionRight.get_Name() + "))"
-        
-        relation.set_SQL(res)
-
-    def print_SQL(self): #affiche à la console la requette SQL
-        res = self.get_Relation()
-        self.set_SQL(res)
-        print(res.get_SQL())
+    def get_SQL(self):
+        """
+        Retourne la requête SQL de la nouvelle relation
+        """
+        return self.newRelation.get_SQL()

@@ -95,3 +95,51 @@ def valid_Rename(param1, param2, param3):
     
     if param1 not in names:
         raise Exception("Cet attribut n\'existe pas dans la relation")
+
+def valid_Union(param1, param2):
+    """
+    Vérifications pour l'opérateur Union dans SPJRUD
+    - param1 = une relation
+    - param2 = une relation
+    """
+    #on vérifie si les deux paramètres sont du bon type
+    if not isinstance(param1, Relation):
+        raise Exception("Le premier parametre doit etre du type \'Relation\'")
+    if not isinstance(param2, Relation):
+        raise Exception("Le second parametre doit etre du type \'Relation\'")
+
+    #on vérifie si la jointure est possible
+    attributes = []
+    for att in param1.get_Attributes():
+        attributes.append(att.get_Name())
+    
+    if len(param1.get_Attributes()) != len(param2.get_Attributes()):
+        raise Exception("Les deux relations n\'ont pas le meme nombre d\'attributs")
+    
+    for att in param2.get_Attributes():
+        if att.get_Name() not in attributes:
+            raise Exception("Les attributs des relations ne sont pas les memes")
+
+def valid_Difference(param1, param2):
+    """
+    Vérifications pour l'opérateur Difference dans SPJRUD
+    - param1 = une relation
+    - param2 = une relation
+    """
+    #on vérifie si les deux paramètres sont du bon type
+    if not isinstance(param1, Relation):
+        raise Exception("Le premier parametre doit etre du type \'Relation\'")
+    if not isinstance(param2, Relation):
+        raise Exception("Le second parametre doit etre du type \'Relation\'")
+
+    #on vérifie si la difference est possible
+    attributes = []
+    for att in param1.get_Attributes():
+        attributes.append(att.get_Name())
+    
+    if len(param1.get_Attributes()) != len(param2.get_Attributes()):
+        raise Exception("Les deux relations n\'ont pas le meme nombre d\'attributs")
+    
+    for att in param2.get_Attributes():
+        if att.get_Name() not in attributes:
+            raise Exception("Les attributs des relations ne sont pas les memes")
