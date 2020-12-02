@@ -9,11 +9,10 @@ class Rename(SPJRUD):
     def __init__(self, subExpressionLeft, subExpressionRight):
         if not isinstance(subExpressionLeft, Equal):
             raise Exception("Le premier parametre doit etre du type \'Equal\'")
-        if isinstance(subExpressionLeft, Equal):
-            if not isinstance(subExpressionLeft.get_AttributeLeft(), Attribute):
-                raise Exception("Le premier sous-parametre du premier parametre doit etre du type \'Attribute\'")
-            if not isinstance(subExpressionLeft.get_AttributeRight(), Constante):
-                raise Exception("Le second sous-parametre du premier parametre doit etre du type \'Constante\'")
+        if not isinstance(subExpressionLeft.get_AttributeLeft(), str):
+            raise Exception("Le premier sous-parametre du premier parametre doit etre du type \'str\'")
+        if not isinstance(subExpressionLeft.get_AttributeRight(), str):
+            raise Exception("Le second sous-parametre du premier parametre doit etre du type \'str\'")
         if not isinstance(subExpressionRight, Relation):
             raise Exception("Le second parametre doit etre du type \'Relation\'")
 

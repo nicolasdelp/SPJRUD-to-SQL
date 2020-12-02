@@ -2,53 +2,52 @@ from SPJRUD.SPJRUD import SPJRUD
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
 
+from SPJRUD.Validation import *
+
 class Project(SPJRUD):
 
     def __init__(self, listOfParameters, subExpressionRight):
-        if not isinstance(listOfParameters, list):
-            raise Exception("Le premier parametre doit etre du type \'list\'")
+        """
+        Constructeur de l'opérateur Project
+        - listOfParameters = une liste de paramètres (string) à projeter
+        - subExpressionRight = une relation
 
-        if not isinstance(subExpressionRight, Relation):
-            raise Exception("Le second parametre doit etre du type \'Relation\'")
-        
-        for param in listOfParameters: #verifie si les attributs de la liste sont bien dans la relation
-            self.check_Expression(param, subExpressionRight)
+        >> Project(['Param1', 'Param2', ...], Relation)
+        """
+        valid_Project(listOfParameters, subExpressionRight)
 
-        self.listOfParameters = listOfParameters #liste retourné par l'égalitée
-        self.subExpressionRight = subExpressionRight #relation sur laquelle on doit travailler
+        self.listOfParameters = listOfParameters
+        self.relation = subExpressionRight
         
+        self.clean_SQL()
         self.set_SQL()
-
-    def check_Expression(self, attributeName, relation): 
-        names = []
-        for att in relation.get_Attributes():
-            names.append(att.get_Name())
-        
-        if attributeName not in names:
-            raise Exception("Cet attribut n\'existe pas dans la relation")
-
-    def get_Relation(self): #retourne la relation qui a été "modifié"
-        return self.subExpressionRight
-
-    def set_SQL(self):
-        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
-            res = "SELECT " + ",".join(self.listOfParameters) + " FROM " + self.subExpressionRight.get_SQL()
-        else:
-            res = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.subExpressionRight.get_SQL() + ")"
-        self.subExpressionRight.set_SQL(res)
     
     def clean_SQL(self):
+        """
+        Supprime les doublons car SQL ne le fais pas automatiquement
+        """
         element = []
         for elem in self.listOfParameters:
-            element.append("a." + elem + "=b." + elem)
-        
-        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
-            res = "DELETE a FROM " + self.subExpressionRight.get_SQL() + " AS a, " + self.subExpressionRight.get_SQL() + " AS b WHERE " + " AND ".join(element)
-        else:
-            res = "DELETE a FROM (" + self.subExpressionRight.get_SQL() + ") AS a, (" + self.subExpressionRight.get_SQL() + ") AS b WHERE " + " AND ".join(element)
-        return res
+            element.append("a." + elem + " = b." + elem)
+
+        sql = "DELETE a FROM (" + self.relation.get_SQL() + ") AS a, (" + self.relation.get_SQL() + ") AS b WHERE " + " AND ".join(element)
+        self.relation.set_CleanSQL(sql)
+
+    def get_Relation(self):
+        """
+        Retourne la relation suite aux modifications effectuées
+        """
+        return self.relation
+
+    def set_SQL(self):
+        """
+        Enregistre la requête SQL dans la relation
+        """
+        sql = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.relation.get_SQL() + ")"
+        self.relation.set_SQL(sql)
     
-    def print_SQL(self): #affiche à la console la requette SQL
-        print(self.clean_SQL())
-        res = self.get_Relation()
-        print(res.get_SQL())
+    def get_SQL(self):
+        """
+        Retourne la liste des requêtes SQL de la relation
+        """
+        return [self.get_Relation().get_CleanSQL(), self.get_Relation().get_SQL()]

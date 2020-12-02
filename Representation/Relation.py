@@ -4,6 +4,7 @@ from Representation.Attribute import Attribute
 class Relation(Node):
 
     def __init__(self, relation_name, list_attributes):
+        self.SQL = []
         self.set_Name(relation_name)
         self.set_Attributes(list_attributes)
         self.set_SQL(relation_name)
@@ -35,3 +36,10 @@ class Relation(Node):
 
     def get_SQL(self):
         return self.SQL
+
+    def set_CleanSQL(self, SQL):
+        self.CleanSQL = SQL
+    
+    def get_CleanSQL(self):
+        return self.CleanSQL
+

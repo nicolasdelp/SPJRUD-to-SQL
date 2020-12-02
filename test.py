@@ -56,15 +56,15 @@ z = Relation("Relation", [a, b, c])
 
 f = Constante("Constante")
 
-g = Equal(a, f)
-h = Equal(b, c)
+# g = Equal(a, f)
+# h = Equal(b, c)
 # i = Equal(d, f)
 """
 Exception: Cet attribut n'existe pas dans la relation
 """
 
-res1 = Select(g, e)
-res2 = Select(h, z)
+# res1 = Select(g, e)
+# res2 = Select(h, z)
 # res3 = Select(i, e)
 
 # res1.set_SQL()
@@ -80,21 +80,28 @@ res2 = Select(h, z)
 # res6 = Project(['Attribute', 'Attribute2'], res1.get_Relation())
 # res6.print_SQL()
 
-Project(['attribute', 'attribute2'], 
-    Select(Equal(Attribute("attribute", 'TEXT'),f), 
+print(Project(['attribute', 'attribute2'], 
+    Select(Equal("attribute","caca"), 
         Relation("relation", 
             [Attribute("attribute", 'TEXT'), 
             Attribute("attribute2", 'TEXT'), 
             Attribute("attribute3", 'TEXT'), 
-            Attribute("attribute4", 'TEXT')])).get_Relation()).print_SQL()
+            Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[0])
 
+print(Project(['attribute', 'attribute2'], 
+    Select(Equal("attribute","caca"), 
+        Relation("relation", 
+            [Attribute("attribute", 'TEXT'), 
+            Attribute("attribute2", 'TEXT'), 
+            Attribute("attribute3", 'TEXT'), 
+            Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[1])
 
 firstRel = Relation("firstRel", [a, b, c])
 secondRel = Relation("secondRel", [c, d, a])
 
 Join(firstRel, secondRel).print_SQL()
 
-aze = Equal(b, Constante("Nicolas"))
+aze = Equal("Attribute2", "Nicolas")
 Rename(aze, firstRel).print_SQL()
 
 firstRel2 = Relation("firstRel", [a, b, c])

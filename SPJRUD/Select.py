@@ -13,6 +13,8 @@ class Select(SPJRUD):
         Constructeur de l'opérateur Select
         - subExpressionLeft = une opération entre 2 termes (une égalité par exemple)
         - subExpressionRight = une relation
+
+        >> Select(Equal('Param1', 'Param2'), Relation)
         """
         valid_Select(subExpressionLeft, subExpressionRight)
         
@@ -36,6 +38,6 @@ class Select(SPJRUD):
     
     def get_SQL(self):
         """
-        Retourne la requête SQL de la relation
+        Retourne la liste des requêtes SQL de la relation
         """
         return self.get_Relation().get_SQL()
