@@ -21,23 +21,30 @@ class Select(SPJRUD):
         self.operation = subExpressionLeft
         self.relation = subExpressionRight
 
+        self.set_NewRelation()
         self.set_SQL()
 
-    def get_Relation(self):
+    def set_NewRelation(self):
         """
-        Retourne la relation suite aux modifications effectuées
+        Crée une nouvelle relation apres avoir effectuer l'opérateur Select
         """
-        return self.relation
+        self.newRelation = Relation("SelectRelation", self.relation.get_Attributes())
+
+    def get_NewRelation(self):
+        """
+        Retourne la nouvelle relation
+        """
+        return self.newRelation
     
     def set_SQL(self):
         """
         Enregistre la requête SQL dans la relation
         """
         sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + self.operation.return_NameList()[1]
-        self.relation.set_SQL(sql)
+        self.newRelation.set_SQL(sql)
     
     def get_SQL(self):
         """
         Retourne la liste des requêtes SQL de la relation
         """
-        return self.get_Relation().get_SQL()
+        return self.newRelation.get_SQL()

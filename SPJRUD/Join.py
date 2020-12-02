@@ -13,14 +13,16 @@ class Join(SPJRUD):
         self.firstRelation = subExpressionLeft
         self.secondRelation = subExpressionRight
 
+        self.set_NewRelation()
         self.AttributeInCommon()
+        self.set_SQL()
 
-    def AttributeInCommon(self):
+
+    def set_NewRelation(self):
         """
-        Enregistre les atributs en communs et crée la nouvelle relation suite à la jointure
+        Crée une nouvelle relation apres avoir effectuer l'opérateur Join
         """
         attributes = []
-        self.attributeInCommon = []
 
         for att in self.firstRelation.get_Attributes():
             attributes.append(att)
@@ -28,20 +30,28 @@ class Join(SPJRUD):
         for att in self.secondRelation.get_Attributes():
             if att not in attributes:
                 attributes.append(att)
-            else:
-                self.attributeInCommon.append(att)
 
         self.newRelation = Relation("JoinRelation", attributes)
 
-    def get_Relation(self):
+    def get_NewRelation(self):
         """
-        Retourne la relation suite aux modifications effectuées
+        Retourne la nouvelle relation
         """
         return self.newRelation
 
+    def AttributeInCommon(self):
+        """
+        Enregistre les atributs en communs de la jointure
+        """
+        self.attributeInCommon = []
+
+        for att in self.secondRelation.get_Attributes():
+            if att in self.firstRelation.get_Attributes():
+                self.attributeInCommon.append(att)
+
     def set_SQL(self):
         """
-        Enregistre la requête SQL dans la relation
+        Enregistre la requête SQL dans la nouvelle relation
         """
         element = []
 
@@ -52,8 +62,8 @@ class Join(SPJRUD):
 
         self.newRelation.set_SQL(sql)
 
-    def print_SQL(self):
+    def get_SQL(self):
         """
-        Retourne la liste des requêtes SQL de la relation
+        Retourne la liste des requêtes SQL de la nouvelle relation
         """
         return self.newRelation.get_SQL()

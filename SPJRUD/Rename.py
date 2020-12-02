@@ -6,41 +6,43 @@ from Representation.Attribute import Attribute
 
 class Rename(SPJRUD):
 
-    def __init__(self, subExpressionLeft, subExpressionRight):
-        if not isinstance(subExpressionLeft, Equal):
-            raise Exception("Le premier parametre doit etre du type \'Equal\'")
-        if not isinstance(subExpressionLeft.get_AttributeLeft(), str):
-            raise Exception("Le premier sous-parametre du premier parametre doit etre du type \'str\'")
-        if not isinstance(subExpressionLeft.get_AttributeRight(), str):
-            raise Exception("Le second sous-parametre du premier parametre doit etre du type \'str\'")
-        if not isinstance(subExpressionRight, Relation):
-            raise Exception("Le second parametre doit etre du type \'Relation\'")
+    def __init__(self, oldName, newName, subExpressionRight):
 
-        self.check_Expression(subExpressionLeft.return_NameList()[0], subExpressionRight) #verifie si l'attribut de gauche de subExpression est bien dans la relation
+        self.oldName = oldName
+        self.newName = newName
+        self.relation = subExpressionRight
 
-        self.subExpressionLeft = subExpressionLeft
-        self.subExpressionRight = subExpressionRight
-
+        self.set_NewRelation()
         self.set_SQL()
+    
+    def set_NewRelation(self):
+        """
+        Crée une nouvelle relation apres avoir effectuer l'opérateur Rename
+        """
+        attributes = []
+        for att in self.relation.get_Attributes():
+            if att.get_Name() != self.oldName:
+                attributes.append(att)
+            elif att.get_Name() == self.oldName:
+                attributes.append(Attribute(self.newName, att.get_Type()))
 
-    def check_Expression(self, attributeName, relation): 
-        names = []
-        for att in relation.get_Attributes():
-            names.append(att.get_Name())
-        
-        if attributeName not in names:
-            raise Exception("Cet attribut n\'existe pas dans la relation")
+        self.newRelation = Relation("RenameRelation", attributes)
 
-    def get_Relation(self): #retourne la relation qui a été "modifié"
-        return self.subExpressionRight
+    def get_NewRelation(self):
+        """
+        Retourne la nouvelle relation
+        """
+        return self.newRelation
 
     def set_SQL(self):
-        if self.subExpressionRight.get_SQL() == self.subExpressionRight.get_Name():
-            res = "SELECT " + self.subExpressionLeft.return_NameList()[0] + " AS " + self.subExpressionLeft.return_NameList()[1] + " FROM " + self.subExpressionRight.get_SQL()
-        else:
-            res = "SELECT " + self.subExpressionLeft.return_NameList()[0] + " AS " + self.subExpressionLeft.return_NameList()[1] + " FROM (" + self.subExpressionRight.get_SQL() + ")"
-        self.subExpressionRight.set_SQL(res)
+        """
+        Enregistre la requête SQL dans la nouvelle relation
+        """
+        sql = "SELECT " + self.oldName + " AS " + self.newName + " FROM (" + self.relation.get_SQL() + ")"
+        self.newRelation.set_SQL(sql)
 
-    def print_SQL(self): #affiche à la console la requette SQL
-        res = self.get_Relation()
-        print(res.get_SQL())
+    def get_SQL(self):
+        """
+        Retourne la liste des requêtes SQL de la nouvelle relation
+        """
+        return self.newRelation.get_SQL()

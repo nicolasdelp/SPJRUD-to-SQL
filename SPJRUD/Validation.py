@@ -62,7 +62,7 @@ def valid_Join(param1, param2):
     #on vérifie si il existe au moins 1 attribut en commun dans les 2 relations
     attributes = []
     inTheList = 0
-    
+
     for att in param1.get_Attributes():
         attributes.append(att.get_Name())
     
@@ -72,3 +72,26 @@ def valid_Join(param1, param2):
     
     if inTheList == 0:
         raise Exception("La jointure est impossible, aucun attribut n\'est dans les deux relations")
+
+def valid_Rename(param1, param2, param3):
+    """
+    Vérifications pour l'opérateur Select dans SPJRUD
+    - param1 = l'ancien nom d'attribut
+    - param2 = le nouveau nom d'attribut
+    - param3 = une relation
+    """
+    #on vérifie si les deux paramètres sont du bon type
+    if not isinstance(param1, str):
+        raise Exception("Le premier parametre doit etre du type \'str\'")
+    if not isinstance(param2, str):
+        raise Exception("Le second parametre doit etre du type \'str\'")
+    if not isinstance(param3, Relation):
+        raise Exception("Le dernier parametre doit etre du type \'Relation\'")
+
+    #on vérifie si l'attribut à renomer est dans la relation
+    names = []
+    for att in param3.get_Attributes():
+        names.append(att.get_Name())
+    
+    if param1 not in names:
+        raise Exception("Cet attribut n\'existe pas dans la relation")
