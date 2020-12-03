@@ -26,7 +26,7 @@ class Difference(SPJRUD):
         """
         Crée une nouvelle relation apres avoir effectuer l'opérateur Difference
         """
-        self.newRelation = Relation("DifferenceRelation", self.firstRelation.get_Attributes())
+        self.newRelation = Relation(self.firstRelation.get_Name(), self.firstRelation.get_Attributes())
 
     def get_NewRelation(self):
         """

@@ -26,7 +26,7 @@ class Union(SPJRUD):
         """
         Crée une nouvelle relation apres avoir effectuer l'opérateur Union
         """
-        self.newRelation = Relation("UnionRelation", self.firstRelation.get_Attributes())
+        self.newRelation = Relation(self.firstRelation.get_Name(), self.firstRelation.get_Attributes())
 
     def get_NewRelation(self):
         """
@@ -38,7 +38,7 @@ class Union(SPJRUD):
         """
         Enregistre la requête SQL dans la nouvelle relation
         """
-        sql = "(SELECT * FROM (" + self.firstRelation.get_Name() + ")) UNION (SELECT * FROM (" + self.secondRelation.get_Name() + "))"
+        sql = "SELECT * FROM (" + self.firstRelation.get_Name() + ") UNION SELECT * FROM (" + self.secondRelation.get_Name() + ")"
         self.newRelation.set_SQL(sql)
 
     def get_SQL(self):

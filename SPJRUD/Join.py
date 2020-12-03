@@ -37,7 +37,7 @@ class Join(SPJRUD):
             if att not in attributes:
                 attributes.append(att)
 
-        self.newRelation = Relation("JoinRelation", attributes)
+        self.newRelation = Relation(self.firstRelation.get_Name(), attributes)
 
     def get_NewRelation(self):
         """

@@ -37,7 +37,7 @@ class Rename(SPJRUD):
             elif att.get_Name() == self.oldName:
                 attributes.append(Attribute(self.newName, att.get_Type()))
 
-        self.newRelation = Relation("RenameRelation", attributes)
+        self.newRelation = Relation(self.relation.get_Name(), attributes)
 
     def get_NewRelation(self):
         """

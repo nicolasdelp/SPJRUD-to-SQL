@@ -88,21 +88,17 @@ Exception: Cet attribut n'existe pas dans la relation
 #             Attribute("attribute3", 'TEXT'), 
 #             Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[0])
 
-print(Project(['attribute', 'attribute2'], 
+x = Project(['attribute', 'attribute2'], 
     Select(Equal("attribute","caca"), 
         Relation("relation", 
             [Attribute("attribute", 'TEXT'), 
             Attribute("attribute2", 'TEXT'), 
             Attribute("attribute3", 'TEXT'), 
-            Attribute("attribute4", 'TEXT')])).get_NewRelation()).get_SQL()[0])
+            Attribute("attribute4", 'TEXT')])).get_NewRelation())
 
-print(Project(['attribute', 'attribute2'], 
-    Select(Equal("attribute","caca"), 
-        Relation("relation", 
-            [Attribute("attribute", 'TEXT'), 
-            Attribute("attribute2", 'TEXT'), 
-            Attribute("attribute3", 'TEXT'), 
-            Attribute("attribute4", 'TEXT')])).get_NewRelation()).get_SQL()[1])
+print(x.get_CleanSQL())
+
+print(x.get_SQL())
 
 # print(Project(['attribute', 'attribute2'], 
 #     Select(Equal("attribute","caca"), 

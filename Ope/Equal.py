@@ -9,7 +9,8 @@ class Equal(Ope):
             raise Exception("Le premier parametre doit etre du type \'str\'")
 
         if not isinstance(attributeRight, str):
-            raise Exception("Le deuxieme parametre doit etre du type \'str\'")
+            if not isinstance(attributeRight, Constante):
+                raise Exception("Le deuxieme parametre doit etre du type \'str\' ou \'Constante\'")
         
         self.attributeLeft = attributeLeft
         self.attributeRight = attributeRight
@@ -25,4 +26,7 @@ class Equal(Ope):
         return self.sign
 
     def return_NameList(self): #retourne une liste pour permettre à l'opérateur du dessus d'agir
-        return [self.attributeLeft, self.attributeRight]
+        if isinstance(self.attributeRight, Constante):
+            return [self.attributeLeft, self.attributeRight.get_Value()]
+        else:
+            return [self.attributeLeft, self.attributeRight]

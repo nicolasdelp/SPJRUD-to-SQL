@@ -3,6 +3,7 @@ from Ope.Ope import Ope
 from Ope.Equal import Equal
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
+from Representation.Constante import Constante
 
 from SPJRUD.Validation import *
 
@@ -28,7 +29,7 @@ class Select(SPJRUD):
         """
         Crée une nouvelle relation apres avoir effectuer l'opérateur Select
         """
-        self.newRelation = Relation("SelectRelation", self.relation.get_Attributes())
+        self.newRelation = Relation(self.relation.get_Name(), self.relation.get_Attributes())
 
     def get_NewRelation(self):
         """
@@ -40,7 +41,11 @@ class Select(SPJRUD):
         """
         Enregistre la requête SQL dans la relation
         """
-        sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + self.operation.return_NameList()[1]
+        if isinstance(self.operation.get_AttributeRight(), Constante):
+            sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + "'" + self.operation.return_NameList()[1] + "'"
+        else:
+            sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + self.operation.return_NameList()[1]
+
         self.newRelation.set_SQL(sql)
     
     def get_SQL(self):

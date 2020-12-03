@@ -1,6 +1,26 @@
+from SPJRUD.SPJRUD import SPJRUD
+from SPJRUD.Select import Select
+from SPJRUD.Project import Project
+from SPJRUD.Join import Join
+from SPJRUD.Rename import Rename
+from SPJRUD.Union import Union
+from SPJRUD.Difference import Difference
+
+from Ope.Equal import Equal
+
+from Representation.Constante import Constante
+from Representation.Attribute import Attribute
+from Representation.Relation import Relation
+
 import sqlite3
 
 def creat_Database(name):
+    """
+    Création d'une base de donnée automatiquement rempli avec 3 tables (emp, dept, salgrade)
+    - name = le nom de la base de donnée
+
+    >> creat_Database("BDD")
+    """
     connection = sqlite3.connect(name + ".db")
     cursor = connection.cursor()
 
@@ -75,8 +95,14 @@ def creat_Database(name):
     #interruption de la connexion
     connection.close()
 
-def print_Databases(name):
-    connection = sqlite3.connect(name + ".db")
+def print_Databases(database):
+    """
+    Affiche tout le contenu des 3 tables de la base de donnée dans la console
+    - database = la base de donnée
+
+    >> print_Databases("BDD.db")
+    """
+    connection = sqlite3.connect(database)
     cursor = connection.cursor()
 
     #affichage des tables
@@ -96,19 +122,49 @@ def print_Databases(name):
     #interruption de la connexion
     connection.close()
 
-def getAttributesFromTable(databaseName, table) :
-    connection = sqlite3.connect(databaseName + ".db")
+def get_AttributesFromTable(database, table):
+    """
+    Retourne le nom des attributs et leur type, d'une table d'une base de donnée
+    - database = la base de donnée
+    - table = la table
+
+    >> get_AttributesFromTable("BDD.db", "emp")
+    """
+    connection = sqlite3.connect(database)
     cursor = connection.cursor()
+
     infos = cursor.execute("PRAGMA table_info(" + table + ");")
     
-    res = []
+    attributesName = []
+    attributesType = []
     for att in infos:
-        res.append(att[1])
+        attributesName.append(att[1])
+        attributesType.append(att[2])
 
     connection.close()
+    return [attributesName, attributesType]
+    
+def creat_RelationFromDatabase(database, table):
+    """
+    Retourne une relation en fonction de la table d'une base de donnée
+    - database = la base de donnée
+    - table = la table
 
-    return res
+    >> creat_RelationFromDatabase("BDD.db", "emp")
+    """
+    attributes = []
+    for x in range(len(get_AttributesFromTable(database, table)[0])): #la taille des 2 list est la même
+        attributes.append(Attribute(get_AttributesFromTable(database, table)[0][x], get_AttributesFromTable(database, table)[1][x]))
+    
+    return Relation(table, attributes)
 
-#creat_Database("database")
-print_Databases("database")
-# print(",".join(getAttributesFromTable("database", "emp")))
+def executeSQL_OnDatabase(database, SQL):
+    connection = sqlite3.connect(database)
+    cursor = connection.cursor()
+
+    for row in cursor.execute(SQL):
+        print(row)
+    
+    connection.commit()
+
+    connection.close()

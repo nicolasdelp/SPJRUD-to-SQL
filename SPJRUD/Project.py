@@ -34,7 +34,7 @@ class Project(SPJRUD):
                 if elem == att.get_Name():
                     newAttributes.append(att)
 
-        self.newRelation = Relation("ProjectRelation", newAttributes)
+        self.newRelation = Relation(self.relation.get_Name(), newAttributes)
 
     def get_NewRelation(self):
         """
@@ -53,6 +53,12 @@ class Project(SPJRUD):
 
         sql = "DELETE a FROM (" + self.relation.get_SQL() + ") AS a, (" + self.relation.get_SQL() + ") AS b WHERE " + " AND ".join(element)
         self.newRelation.set_CleanSQL(sql)
+    
+    def get_CleanSQL(self):
+        """
+        Retourne la requête SQL qui supprime les doublons de la nouvelle relation
+        """
+        return self.newRelation.get_CleanSQL()
 
     def set_SQL(self):
         """
@@ -63,6 +69,6 @@ class Project(SPJRUD):
     
     def get_SQL(self):
         """
-        Retourne la liste des requêtes SQL de la relation
+        Retourne la requête SQL de la nouvelle relation
         """
-        return [self.newRelation.get_CleanSQL(), self.newRelation.get_SQL()]
+        return self.newRelation.get_SQL()
