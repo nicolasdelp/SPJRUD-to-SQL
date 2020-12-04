@@ -21,7 +21,7 @@ x = creat_RelationFromDatabase("database.db", "emp2")
 y = creat_RelationFromDatabase("database.db", "emp")
 z = creat_RelationFromDatabase("database.db", "dept")
 
-a = Select(Equal("ename", Constante("JAMES")), y)
+# a = Select(Equal("ename", "sal"), y)
 
 b = Project(["ename", "sal", "deptno"], y)
 

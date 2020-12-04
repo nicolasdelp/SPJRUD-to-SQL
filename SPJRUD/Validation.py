@@ -25,6 +25,18 @@ def valid_Select(param1, param2):
     if param1.return_NameList()[0] not in names:
         raise Exception("L\'attribut de gauche de l'egalite n\'existe pas dans la relation")
 
+    if isinstance(param1.get_AttributeRight(), str): #quand ce n'est pas une constante on vérifie que l'argument existe dans la relation
+        if param1.return_NameList()[1] not in names:
+            raise Exception("L\'attribut de droite de l'egalite n\'existe pas dans la relation")
+
+        attributes = []
+        for att in param2.get_Attributes():
+            if att.get_Name() in param1.return_NameList():
+                attributes.append(att)
+        
+        if attributes[0].get_Type() != attributes[1].get_Type():
+            raise Exception("Le type des 2 arguments ne sont pas compatible")
+  
 def valid_Project(param1, param2):
     """
     Vérifications pour l'opérateur Project dans SPJRUD
