@@ -1,4 +1,2 @@
-from Representation.Node import Node
-
-class SPJRUD(Node):
+class SPJRUD:
     pass

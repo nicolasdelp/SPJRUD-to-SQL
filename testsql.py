@@ -10,8 +10,6 @@ from Representation.Constante import Constante
 from Representation.Attribute import Attribute
 from Representation.Relation import Relation
 
-from Representation.Node import Node
-
 from sql import *
 
 # creat_Database("database")
@@ -37,7 +35,9 @@ e = Union(x, y)
 
 f = Difference(x, y)
 
+g = Join(Project(["sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y).get_NewRelation()).get_NewRelation()).get_NewRelation(), z)
 
-sql = f.get_SQL()
+
+sql = g.get_SQL()
 
 executeSQL_OnDatabase("database.db", sql)

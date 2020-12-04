@@ -1,6 +1,4 @@
-from Representation.Node import Node
-
-class Constante(Node): #représente une constante
+class Constante: #représente une constante
     
     def __init__(self, value):
         self.set_Value(value)

@@ -1,7 +1,6 @@
-from Representation.Node import Node
 from Representation.Attribute import Attribute
 
-class Relation(Node):
+class Relation:
 
     def __init__(self, relation_name, list_attributes):
         self.SQL = []

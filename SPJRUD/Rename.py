@@ -49,7 +49,12 @@ class Rename(SPJRUD):
         """
         Enregistre la requête SQL dans la nouvelle relation
         """
-        sql = "SELECT " + self.oldName + " AS " + self.newName + " FROM (" + self.relation.get_SQL() + ")"
+        attributes = []
+        for att in self.relation.get_Attributes():
+            if att.get_Name() != self.oldName:
+                attributes.append(att.get_Name())
+                
+        sql = "SELECT " + self.oldName + " AS " + self.newName + "," + ",".join(attributes) + " FROM (" + self.relation.get_SQL() + ")"
         self.newRelation.set_SQL(sql)
 
     def get_SQL(self):

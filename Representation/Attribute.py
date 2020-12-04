@@ -1,6 +1,4 @@
-from Representation.Node import Node
-
-class Attribute(Node):
+class Attribute:
 
     def __init__(self, attribute_name, attribute_type):
         self.set_Name(attribute_name)
