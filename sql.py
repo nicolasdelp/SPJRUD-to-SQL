@@ -39,10 +39,10 @@ def creat_Database(name):
     cursor.execute("CREATE TABLE emp (" + struct_table + ");")
 
     #création des éléments de la table
-    cursor.execute("INSERT INTO emp VALUES (1234,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
-    cursor.execute("INSERT INTO emp VALUES (2345,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
-    cursor.execute("INSERT INTO emp VALUES (3456,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
-    cursor.execute("INSERT INTO emp VALUES (4567,'CLARK','MANAGER',7839,'2001-06-09',2450,NULL,10);")
+    # cursor.execute("INSERT INTO emp VALUES (1234,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    # cursor.execute("INSERT INTO emp VALUES (2345,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    # cursor.execute("INSERT INTO emp VALUES (3456,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    # cursor.execute("INSERT INTO emp VALUES (4567,'CLARK','MANAGER',7839,'2001-06-09',2450,NULL,10);")
 
     cursor.execute("INSERT INTO emp VALUES (7839,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
     cursor.execute("INSERT INTO emp VALUES (7698,'BLAKE','MANAGER',7839,'2001-05-01',2850,NULL,30);")
@@ -61,6 +61,29 @@ def creat_Database(name):
     cursor.execute("INSERT INTO emp VALUES (7939,'PALMER','ANALYST',7902,'2012-01-23',1300,NULL,10);")
     cursor.execute("INSERT INTO emp VALUES (7983,'LOPEZ','SALESMAN',7566,'2012-01-23',1500,600,20);")
     cursor.execute("INSERT INTO emp VALUES (7994,'WILLIAMS','ANALYST',7698,'2012-01-23',950,NULL,30);")
+
+    #stucture de la table emp2
+    struct_table = """ empno INTEGER PRIMARY KEY,
+                    ename TEXT,
+                    job TEXT,
+                    mgr INTEGER,
+                    hiredate TEXT,
+                    sal FLOAT,
+                    comm FLOAT,
+                    deptno INTEGER NOT NULL
+                """
+
+    #création de la table emp
+    cursor.execute("CREATE TABLE emp2 (" + struct_table + ");")
+
+    #création des éléments de la table
+    cursor.execute("INSERT INTO emp2 VALUES (2828,'NICOLAS','PRESIDENT',NULL,'2020-12-04',5000,NULL,10);")
+    cursor.execute("INSERT INTO emp2 VALUES (2323,'ALEXANDRE','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+
+    cursor.execute("INSERT INTO emp2 VALUES (7839,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    cursor.execute("INSERT INTO emp2 VALUES (7698,'BLAKE','MANAGER',7839,'2001-05-01',2850,NULL,30);")
+    cursor.execute("INSERT INTO emp2 VALUES (7782,'CLARK','MANAGER',7839,'2001-06-09',2450,NULL,10);")
+    cursor.execute("INSERT INTO emp2 VALUES (7566,'JONES','MANAGER',7839,'2001-04-02',2975,NULL,20);")
 
     #stucture de la table dept
     struct_table = """

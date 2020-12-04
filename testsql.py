@@ -19,7 +19,7 @@ from sql import *
 # for x in get_AttributesFromTable("database.db", "emp"):
 #     print(x)
 
-# creat_Database("database")
+x = creat_RelationFromDatabase("database.db", "emp2")
 y = creat_RelationFromDatabase("database.db", "emp")
 z = creat_RelationFromDatabase("database.db", "dept")
 
@@ -31,7 +31,13 @@ bb = Project(["dname", "deptno", "loc"], z)
 
 c = Join(b.get_NewRelation(), bb.get_NewRelation())
 
+d = Rename("ename", "Nom", y)
 
-sql = c.get_SQL()
+e = Union(x, y)
+
+f = Difference(x, y)
+
+
+sql = f.get_SQL()
 
 executeSQL_OnDatabase("database.db", sql)
