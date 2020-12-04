@@ -20,7 +20,6 @@ class Project(SPJRUD):
         self.relation = subExpressionRight
         
         self.set_NewRelation()
-        self.set_CleanSQL()
         self.set_SQL()
 
     def set_NewRelation(self):
@@ -46,11 +45,6 @@ class Project(SPJRUD):
         """
         Enregistre la requête SQL dans la relation
         """
-        element = []
-
-        for elem in self.listOfParameters:
-            element.append("a." + elem + " = b." + elem)
-
         #elements n'ayant pas de double
         sql1 = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.relation.get_SQL() + ") GROUP BY " + ",".join(self.listOfParameters) + " HAVING COUNT(*) = 1"
         #elements ayant un (des) double(s)

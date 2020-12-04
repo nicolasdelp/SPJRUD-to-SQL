@@ -21,12 +21,17 @@ from sql import *
 
 # creat_Database("database")
 y = creat_RelationFromDatabase("database.db", "emp")
+z = creat_RelationFromDatabase("database.db", "dept")
 
 a = Select(Equal("ename", Constante("JAMES")), y)
 
-b = Project(["ename", "sal", 'job'], y)
+b = Project(["ename", "sal", "deptno"], y)
+
+bb = Project(["dname", "deptno", "loc"], z)
+
+c = Join(b.get_NewRelation(), bb.get_NewRelation())
 
 
-sql = b.get_SQL()
+sql = c.get_SQL()
 
 executeSQL_OnDatabase("database.db", sql)

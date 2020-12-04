@@ -52,8 +52,9 @@ class Join(SPJRUD):
         self.attributeInCommon = []
 
         for att in self.secondRelation.get_Attributes():
-            if att in self.firstRelation.get_Attributes():
-                self.attributeInCommon.append(att)
+            for att2 in self.firstRelation.get_Attributes():
+                if att.get_Name() == att2.get_Name():
+                    self.attributeInCommon.append(att)
 
     def set_SQL(self):
         """
@@ -62,9 +63,9 @@ class Join(SPJRUD):
         element = []
 
         for elem in self.attributeInCommon:
-            element.append(self.firstRelation.get_Name() + "." + elem.get_Name() + "=" + self.secondRelation.get_Name() + "." + elem.get_Name())
+            element.append(self.firstRelation.get_Name() + "." + elem.get_Name() + " = " + self.secondRelation.get_Name() + "." + elem.get_Name())
 
-        sql = "SELECT * FROM (" + self.firstRelation.get_SQL() + ") INNER JOIN (" + self.secondRelation.get_SQL() + ") ON " + ", ".join(element)
+        sql = "SELECT * FROM (" + self.firstRelation.get_SQL() + ") NATURAL JOIN (" + self.secondRelation.get_SQL() + ")"
 
         self.newRelation.set_SQL(sql)
 
