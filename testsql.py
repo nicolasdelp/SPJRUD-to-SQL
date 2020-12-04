@@ -22,18 +22,11 @@ from sql import *
 # creat_Database("database")
 y = creat_RelationFromDatabase("database.db", "emp")
 
-x = Project(['ename', 'sal'], y)
-z = Select(Equal("ename", Constante("JAMES")), y)
+a = Select(Equal("ename", Constante("JAMES")), y)
 
-a = Project(['ename', 'sal'], Select(Equal("ename", Constante("JAMES")), y).get_NewRelation()).get_NewRelation()
-b = Project(['ename', 'sal'], Select(Equal("ename", Constante("FORD")), y).get_NewRelation()).get_NewRelation()
-c = Union(a, b)
+b = Project(["ename", "sal", 'job'], y)
 
-sql = a.get_SQL()
-
-executeSQL_OnDatabase("database.db", sql)
 
 sql = b.get_SQL()
 
 executeSQL_OnDatabase("database.db", sql)
-# print(z.get_SQL())

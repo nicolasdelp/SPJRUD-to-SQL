@@ -41,30 +41,23 @@ class Project(SPJRUD):
         Retourne la relation suite aux modifications effectuées
         """
         return self.newRelation
-    
-    def set_CleanSQL(self):
+
+    def set_SQL(self):
         """
-        Supprime les doublons car SQL ne le fais pas automatiquement
+        Enregistre la requête SQL dans la relation
         """
         element = []
 
         for elem in self.listOfParameters:
             element.append("a." + elem + " = b." + elem)
 
-        sql = "DELETE a FROM (" + self.relation.get_SQL() + ") AS a, (" + self.relation.get_SQL() + ") AS b WHERE " + " AND ".join(element)
-        self.newRelation.set_CleanSQL(sql)
-    
-    def get_CleanSQL(self):
-        """
-        Retourne la requête SQL qui supprime les doublons de la nouvelle relation
-        """
-        return self.newRelation.get_CleanSQL()
+        #elements n'ayant pas de double
+        sql1 = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.relation.get_SQL() + ") GROUP BY " + ",".join(self.listOfParameters) + " HAVING COUNT(*) = 1"
+        #elements ayant un (des) double(s)
+        sql2 = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.relation.get_SQL() + ") GROUP BY " + ",".join(self.listOfParameters) + " HAVING COUNT(*) > 1"
+        #union des deux requetes
+        sql = sql1 + " UNION " + sql2
 
-    def set_SQL(self):
-        """
-        Enregistre la requête SQL dans la relation
-        """
-        sql = "SELECT " + ",".join(self.listOfParameters) + " FROM (" + self.relation.get_SQL() + ")"
         self.newRelation.set_SQL(sql)
     
     def get_SQL(self):

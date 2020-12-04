@@ -39,6 +39,11 @@ def creat_Database(name):
     cursor.execute("CREATE TABLE emp (" + struct_table + ");")
 
     #création des éléments de la table
+    cursor.execute("INSERT INTO emp VALUES (1234,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    cursor.execute("INSERT INTO emp VALUES (2345,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    cursor.execute("INSERT INTO emp VALUES (3456,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
+    cursor.execute("INSERT INTO emp VALUES (4567,'CLARK','MANAGER',7839,'2001-06-09',2450,NULL,10);")
+
     cursor.execute("INSERT INTO emp VALUES (7839,'KING','PRESIDENT',NULL,'2001-11-17',5000,NULL,10);")
     cursor.execute("INSERT INTO emp VALUES (7698,'BLAKE','MANAGER',7839,'2001-05-01',2850,NULL,30);")
     cursor.execute("INSERT INTO emp VALUES (7782,'CLARK','MANAGER',7839,'2001-06-09',2450,NULL,10);")
