@@ -38,7 +38,7 @@ class Difference(SPJRUD):
         """
         Enregistre la requête SQL dans la nouvelle relation
         """
-        sql = "SELECT * FROM (" + self.firstRelation.get_Name() + ") MINUS SELECT * FROM (" + self.secondRelation.get_Name() + ")"
+        sql = "SELECT * FROM (" + self.firstRelation.get_Name() + ") EXCEPT SELECT * FROM (" + self.secondRelation.get_Name() + ")"
         self.newRelation.set_SQL(sql)
 
     def get_SQL(self):
