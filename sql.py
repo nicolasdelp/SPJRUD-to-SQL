@@ -13,6 +13,7 @@ from Representation.Attribute import Attribute
 from Representation.Relation import Relation
 
 import sqlite3
+import os
 
 def creat_Database(name):
     """
@@ -21,6 +22,10 @@ def creat_Database(name):
 
     >> creat_Database("BDD")
     """
+    #on vérifie que la base de donnée n'existe pas encore
+    if os.path.exists(name+".db"):
+        raise Exception("La base de donnée " + name + ".db existe déjà")
+
     connection = sqlite3.connect(name + ".db")
     cursor = connection.cursor()
 
@@ -30,8 +35,8 @@ def creat_Database(name):
                     job TEXT,
                     mgr INTEGER,
                     hiredate TEXT,
-                    sal FLOAT,
-                    comm FLOAT,
+                    sal REAL,
+                    comm REAL,
                     deptno INTEGER NOT NULL
                 """
 
@@ -68,8 +73,8 @@ def creat_Database(name):
                     job TEXT,
                     mgr INTEGER,
                     hiredate TEXT,
-                    sal FLOAT,
-                    comm FLOAT,
+                    sal REAL,
+                    comm REAL,
                     deptno INTEGER NOT NULL
                 """
 
@@ -123,29 +128,33 @@ def creat_Database(name):
     #interruption de la connexion
     connection.close()
 
-def print_Databases(database):
+def print_Databases(database, table):
     """
     Affiche tout le contenu des 3 tables de la base de donnée dans la console
     - database = la base de donnée
 
     >> print_Databases("BDD.db")
     """
+    #on vérifie que la base de donnée existe
+    if not os.path.exists(database):
+        raise Exception("La base de donnée " + database + " n\'existe pas")
+
+    #on vérifie que la table existe
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
 
+    cursor.execute("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='" + table + "'")
+
+    if cursor.fetchone()[0]!=1 :
+	    raise Exception("La table " + table + " n\'existe pas")
+    
+    connection.commit()
+
     #affichage des tables
-    for row in cursor.execute('SELECT * FROM emp'):
+    for row in cursor.execute("SELECT * FROM " + table):
         print(row)
 
     print("------------------------------------------")
-
-    for row in cursor.execute('SELECT * FROM dept'):
-        print(row)
-
-    print("------------------------------------------")
-
-    for row in cursor.execute('SELECT * FROM salgrade'):
-        print(row)
     
     #interruption de la connexion
     connection.close()
@@ -180,13 +189,42 @@ def creat_RelationFromDatabase(database, table):
 
     >> creat_RelationFromDatabase("BDD.db", "emp")
     """
+    #on vérifie que la base de donnée existe
+    if not os.path.exists(database):
+        raise Exception("La base de donnée " + database + " n\'existe pas")
+
+    #on vérifie que la table existe
+    connection = sqlite3.connect(database)
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT count(name) FROM sqlite_master WHERE type='table' AND name='" + table + "'")
+
+    if cursor.fetchone()[0]!=1 :
+	    raise Exception("La table " + table + " n\'existe pas")
+    
+    connection.commit()
+    connection.close()
+
+    #on crée la relation en fonction de la table
     attributes = []
-    for x in range(len(get_AttributesFromTable(database, table)[0])): #la taille des 2 list est la même
-        attributes.append(Attribute(get_AttributesFromTable(database, table)[0][x], get_AttributesFromTable(database, table)[1][x]))
+    for x in range(len(get_AttributesFromTable(database, table)[0])): #car la taille des 2 listes est la même
+        attributes.append(Attribute(get_AttributesFromTable(database, table)[0][x], get_AttributesFromTable(database, table)[1][x])) #nom de l'attribut + type de l'attribut
     
     return Relation(table, attributes)
 
 def executeSQL_OnDatabase(database, SQL):
+    """
+    Exécute une requéte SQL sur une base de donnée
+    - database = la base de donnée
+    - SQL = la requéte SQL
+
+    >> executeSQL_OnDatabase(BDD.db, "SELECT * FROM table")
+    """
+    #on vérifie que la base de donnée existe
+    if not os.path.exists(database):
+        raise Exception("La base de donnée " + database + " n\'existe pas")
+
+    #on execute la requéte
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
 
@@ -194,5 +232,4 @@ def executeSQL_OnDatabase(database, SQL):
         print(row)
     
     connection.commit()
-
     connection.close()
