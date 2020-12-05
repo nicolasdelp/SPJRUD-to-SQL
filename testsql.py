@@ -27,7 +27,7 @@ b = Project(["ename", "sal", "deptno"], y)
 
 bb = Project(["dname", "deptno", "loc"], z)
 
-c = Join(b.get_NewRelation(), bb.get_NewRelation())
+c = Join(b, bb)
 
 d = Rename("ename", "Nom", y)
 
@@ -35,7 +35,7 @@ e = Union(x, y)
 
 f = Difference(x, y)
 
-g = Join(Project(["sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y).get_NewRelation()).get_NewRelation()).get_NewRelation(), z)
+g = Join(Project(["sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y))), z)
 
 
 sql = g.get_SQL()

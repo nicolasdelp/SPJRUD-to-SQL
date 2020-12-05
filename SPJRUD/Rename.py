@@ -17,11 +17,16 @@ class Rename(SPJRUD):
 
         >> Rename(oldName, newName, Relation)
         """
-        valid_Rename(oldName, newName, subExpressionRight)
+        if isinstance(subExpressionRight, Relation):
+            rel = subExpressionRight
+        if isinstance(subExpressionRight, SPJRUD):
+            rel = subExpressionRight.get_NewRelation()
+
+        valid_Rename(oldName, newName, rel)
 
         self.oldName = oldName
         self.newName = newName
-        self.relation = subExpressionRight
+        self.relation = rel
 
         self.set_NewRelation()
         self.set_SQL()
@@ -53,7 +58,7 @@ class Rename(SPJRUD):
         for att in self.relation.get_Attributes():
             if att.get_Name() != self.oldName:
                 attributes.append(att.get_Name())
-                
+
         sql = "SELECT " + self.oldName + " AS " + self.newName + "," + ",".join(attributes) + " FROM (" + self.relation.get_SQL() + ")"
         self.newRelation.set_SQL(sql)
 

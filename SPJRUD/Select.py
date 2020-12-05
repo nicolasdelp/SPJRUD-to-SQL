@@ -17,10 +17,15 @@ class Select(SPJRUD):
 
         >> Select(Equal('Param1', 'Param2'), Relation)
         """
-        valid_Select(subExpressionLeft, subExpressionRight)
+        if isinstance(subExpressionRight, Relation):
+            rel = subExpressionRight
+        if isinstance(subExpressionRight, SPJRUD):
+            rel = subExpressionRight.get_NewRelation()
+
+        valid_Select(subExpressionLeft, rel)
         
         self.operation = subExpressionLeft
-        self.relation = subExpressionRight
+        self.relation = rel
 
         self.set_NewRelation()
         self.set_SQL()

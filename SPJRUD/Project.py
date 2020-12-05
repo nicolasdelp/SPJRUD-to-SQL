@@ -14,10 +14,15 @@ class Project(SPJRUD):
 
         >> Project(['Param1', 'Param2', ...], Relation)
         """
-        valid_Project(listOfParameters, subExpressionRight)
+        if isinstance(subExpressionRight, Relation):
+            rel = subExpressionRight
+        if isinstance(subExpressionRight, SPJRUD):
+            rel = subExpressionRight.get_NewRelation()
+
+        valid_Project(listOfParameters, rel)
 
         self.listOfParameters = listOfParameters
-        self.relation = subExpressionRight
+        self.relation = rel
         
         self.set_NewRelation()
         self.set_SQL()

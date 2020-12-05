@@ -14,10 +14,20 @@ class Union(SPJRUD):
 
         >> Union(Relation, Relation)
         """
-        valid_Union(subExpressionLeft, subExpressionRight)
+        if isinstance(subExpressionLeft, Relation):
+            rel = subExpressionLeft
+        if isinstance(subExpressionLeft, SPJRUD):
+            rel = subExpressionLeft.get_NewRelation()
+
+        if isinstance(subExpressionRight, Relation):
+            rel2 = subExpressionRight
+        if isinstance(subExpressionRight, SPJRUD):
+            rel2 = subExpressionRight.get_NewRelation()
+
+        valid_Union(rel, rel2)
         
-        self.firstRelation = subExpressionLeft
-        self.secondRelation = subExpressionRight
+        self.firstRelation = rel
+        self.secondRelation = rel2
 
         self.set_NewRelation()
         self.set_SQL()

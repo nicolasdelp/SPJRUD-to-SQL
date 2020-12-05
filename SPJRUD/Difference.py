@@ -14,10 +14,20 @@ class Difference(SPJRUD):
 
         >> Difference(Relation, Relation)
         """
-        valid_Difference(subExpressionLeft, subExpressionRight)
+        if isinstance(subExpressionLeft, Relation):
+            rel = subExpressionLeft
+        if isinstance(subExpressionLeft, SPJRUD):
+            rel = subExpressionLeft.get_NewRelation()
 
-        self.firstRelation = subExpressionLeft
-        self.secondRelation = subExpressionRight
+        if isinstance(subExpressionRight, Relation):
+            rel2 = subExpressionRight
+        if isinstance(subExpressionRight, SPJRUD):
+            rel2 = subExpressionRight.get_NewRelation()
+
+        valid_Difference(rel, rel2)
+
+        self.firstRelation = rel
+        self.secondRelation = rel2
 
         self.set_NewRelation()
         self.set_SQL()
