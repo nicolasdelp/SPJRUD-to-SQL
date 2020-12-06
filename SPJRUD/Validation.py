@@ -92,6 +92,15 @@ def valid_Join(param1, param2):
     if inTheList == 0:
         raise Exception("La jointure est impossible, aucun attribut n\'est dans les deux relations")
 
+    #on vérifie si les attributs à joindre sont du même type
+    toCheck = param1.get_Attributes()
+
+    for att in toCheck:
+        for att2 in toCheck:
+            if att.get_Name() == att2.get_Name():
+                if att.get_Type() != att2.get_Type():
+                    raise Exception("La jointure est impossible, les attributs ne sont pas du meme type")
+
 def valid_Rename(param1, param2, param3):
     """
     Vérifications pour l'opérateur Select dans SPJRUD
@@ -138,6 +147,15 @@ def valid_Union(param1, param2):
     for att in param2.get_Attributes():
         if att.get_Name() not in attributes:
             raise Exception("Les attributs des relations ne sont pas les memes")
+    
+    #on vérifie si les attributs sont du même type
+    toCheck = param1.get_Attributes()
+
+    for att in toCheck:
+        for att2 in toCheck:
+            if att.get_Name() == att2.get_Name():
+                if att.get_Type() != att2.get_Type():
+                    raise Exception("L\'union est impossible, les attributs ne sont pas du meme type")
 
 def valid_Difference(param1, param2):
     """
@@ -162,3 +180,12 @@ def valid_Difference(param1, param2):
     for att in param2.get_Attributes():
         if att.get_Name() not in attributes:
             raise Exception("Les attributs des relations ne sont pas les memes")
+
+    #on vérifie si les attributs sont du même type
+    toCheck = param1.get_Attributes()
+
+    for att in toCheck:
+        for att2 in toCheck:
+            if att.get_Name() == att2.get_Name():
+                if att.get_Type() != att2.get_Type():
+                    raise Exception("La difference est impossible, les attributs ne sont pas du meme type")
