@@ -19,8 +19,10 @@ class Select(SPJRUD):
         """
         if isinstance(subExpressionRight, Relation):
             rel = subExpressionRight
+            self.SPJRUD = False
         if isinstance(subExpressionRight, SPJRUD):
             rel = subExpressionRight.get_NewRelation()
+            self.SPJRUD = True
 
         valid_Select(subExpressionLeft, rel)
         
@@ -30,11 +32,23 @@ class Select(SPJRUD):
         self.set_NewRelation()
         self.set_SQL()
 
+    def __str__(self):
+        if not self.SPJRUD:
+            if isinstance(self.operation.get_AttributeRight(), Constante):
+                return "Select(Equal('" + self.operation.return_NameList()[0] + "', Constante('" + self.operation.return_NameList()[1] + "')), Relation('" + self.relation.__str__() + "'))"
+            else:
+                return "Select(Equal('" + self.operation.return_NameList()[0] + "', " + self.operation.return_NameList()[1] + "), Relation('" + self.relation.__str__() + "'))"
+        if self.SPJRUD:
+            if isinstance(self.operation.get_AttributeRight(), Constante):
+                return "Select(Equal('" + self.operation.return_NameList()[0] + "', Constante('" + self.operation.return_NameList()[1] + "')), " + self.relation.__str__() + ")"
+            else:
+                return "Select(Equal('" + self.operation.return_NameList()[0] + "', " + self.operation.return_NameList()[1] + "), " + self.relation.__str__() + ")"
+
     def set_NewRelation(self):
         """
         Crée une nouvelle relation apres avoir effectuer l'opérateur Select
         """
-        self.newRelation = Relation(self.relation.get_Name(), self.relation.get_Attributes())
+        self.newRelation = Relation(self.relation.get_Name(), self.relation.get_Attributes(), SPJRUD=self.__str__())
 
     def get_NewRelation(self):
         """

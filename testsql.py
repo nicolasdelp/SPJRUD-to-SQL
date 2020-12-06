@@ -24,20 +24,33 @@ z = creat_RelationFromDatabase("database.db", "dept")
 # a = Select(Equal("ename", "sal"), y)
 
 b = Project(["ename", "sal", "deptno"], y)
+print(b)
 
 bb = Project(["dname", "deptno", "loc"], z)
+print(bb)
 
 c = Join(b, bb)
+print(c)
 
 d = Rename("ename", "Nom", y)
+print(d)
 
 e = Union(x, y)
+print(e)
 
 f = Difference(x, y)
+print(f)
 
 g = Join(Project(["name", "sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y))), z)
+print(g)
+
+h = Select(Equal("name", Constante("JAMES")),  Rename("ename", "name", y))
+print(h)
+
+i = Project(["name", "sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y)))
+print(i)
 
 
 sql = g.get_SQL()
 
-executeSQL_OnDatabase("database.db", sql)
+# executeSQL_OnDatabase("database.db", sql)

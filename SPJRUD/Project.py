@@ -16,8 +16,10 @@ class Project(SPJRUD):
         """
         if isinstance(subExpressionRight, Relation):
             rel = subExpressionRight
+            self.SPJRUD = False
         if isinstance(subExpressionRight, SPJRUD):
             rel = subExpressionRight.get_NewRelation()
+            self.SPJRUD = True
 
         valid_Project(listOfParameters, rel)
 
@@ -26,6 +28,12 @@ class Project(SPJRUD):
         
         self.set_NewRelation()
         self.set_SQL()
+    
+    def __str__(self):
+        if not self.SPJRUD:
+            return "Project(['" + "', '".join(self.listOfParameters) + "'], Relation('" + self.relation.__str__() + "'))"
+        if self.SPJRUD:
+            return "Project(['" + "', '".join(self.listOfParameters) + "'], " + self.relation.__str__() + ")"
 
     def set_NewRelation(self):
         """
@@ -38,7 +46,7 @@ class Project(SPJRUD):
                 if elem == att.get_Name():
                     newAttributes.append(att)
 
-        self.newRelation = Relation(self.relation.get_Name(), newAttributes)
+        self.newRelation = Relation(self.relation.get_Name(), newAttributes, SPJRUD=self.__str__())
 
     def get_NewRelation(self):
         """

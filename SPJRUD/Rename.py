@@ -10,7 +10,7 @@ class Rename(SPJRUD):
 
     def __init__(self, oldName, newName, subExpressionRight):
         """
-        Constructeur de l'opérateur Select
+        Constructeur de l'opérateur Rename
         - oldName = le nom de l'attribut cible
         - newName = le nouveau nom de cet attribut
         - subExpressionRight = une relation
@@ -19,8 +19,10 @@ class Rename(SPJRUD):
         """
         if isinstance(subExpressionRight, Relation):
             rel = subExpressionRight
+            self.SPJRUD = False
         if isinstance(subExpressionRight, SPJRUD):
             rel = subExpressionRight.get_NewRelation()
+            self.SPJRUD = True
 
         valid_Rename(oldName, newName, rel)
 
@@ -30,6 +32,13 @@ class Rename(SPJRUD):
 
         self.set_NewRelation()
         self.set_SQL()
+
+    def __str__(self):
+        if not self.SPJRUD:
+            return "Rename('" + self.oldName + "', '" + self.newName + "', Relation('" + self.relation.__str__() + "'))"
+
+        if self.SPJRUD:
+            return "Rename('" + self.oldName + "', '" + self.newName + "', " + self.relation.__str__() + ")"
     
     def set_NewRelation(self):
         """
@@ -42,7 +51,7 @@ class Rename(SPJRUD):
             elif att.get_Name() == self.oldName:
                 attributes.append(Attribute(self.newName, att.get_Type()))
 
-        self.newRelation = Relation(self.relation.get_Name(), attributes)
+        self.newRelation = Relation(self.relation.get_Name(), attributes, SPJRUD=self.__str__())
 
     def get_NewRelation(self):
         """

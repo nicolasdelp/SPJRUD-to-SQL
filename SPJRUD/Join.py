@@ -16,13 +16,17 @@ class Join(SPJRUD):
         """
         if isinstance(subExpressionLeft, Relation):
             rel = subExpressionLeft
+            self.SPJRUD1 = False
         if isinstance(subExpressionLeft, SPJRUD):
             rel = subExpressionLeft.get_NewRelation()
+            self.SPJRUD1 = True
 
         if isinstance(subExpressionRight, Relation):
             rel2 = subExpressionRight
+            self.SPJRUD2 = False
         if isinstance(subExpressionRight, SPJRUD):
             rel2 = subExpressionRight.get_NewRelation()
+            self.SPJRUD2 = True
 
         valid_Join(rel, rel2)
 
@@ -33,6 +37,15 @@ class Join(SPJRUD):
         self.AttributeInCommon()
         self.set_SQL()
 
+    def __str__(self):
+        if not self.SPJRUD1 and not self.SPJRUD2:
+            return "Join(Relation('" + self.firstRelation.__str__() + "'), Relation('" + self.secondRelation.__str__() + "'))"
+        if self.SPJRUD1 and not self.SPJRUD2:
+            return "Join(" + self.firstRelation.__str__() + ", Relation('" + self.secondRelation.__str__() + "'))"
+        if not self.SPJRUD1 and self.SPJRUD2:
+            return "Join(Relation('" + self.firstRelation.__str__() + "'), " + self.secondRelation.__str__() + ")"
+        if self.SPJRUD1 and self.SPJRUD2:
+            return "Join(" + self.firstRelation.__str__() + ", " + self.secondRelation.__str__() + ")"
 
     def set_NewRelation(self):
         """
@@ -47,7 +60,7 @@ class Join(SPJRUD):
             if att not in attributes:
                 attributes.append(att)
 
-        self.newRelation = Relation(self.firstRelation.get_Name(), attributes)
+        self.newRelation = Relation(self.firstRelation.get_Name(), attributes, SPJRUD=self.__str__())
 
     def get_NewRelation(self):
         """

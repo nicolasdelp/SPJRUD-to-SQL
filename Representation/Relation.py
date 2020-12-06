@@ -2,11 +2,18 @@ from Representation.Attribute import Attribute
 
 class Relation:
 
-    def __init__(self, relation_name, list_attributes):
+    def __init__(self, relation_name, list_attributes, SPJRUD=""):
         self.SQL = []
         self.set_Name(relation_name)
         self.set_Attributes(list_attributes)
         self.set_SQL(relation_name)
+        self.SPJRUD = SPJRUD
+
+    def __str__(self):
+        if len(self.SPJRUD) == 0:
+            return self.relation_name
+        else:
+            return self.SPJRUD
 
     def set_Name(self, relation_name):
         if not isinstance(relation_name, str):

@@ -16,13 +16,17 @@ class Union(SPJRUD):
         """
         if isinstance(subExpressionLeft, Relation):
             rel = subExpressionLeft
+            self.SPJRUD1 = False
         if isinstance(subExpressionLeft, SPJRUD):
             rel = subExpressionLeft.get_NewRelation()
+            self.SPJRUD1 = True
 
         if isinstance(subExpressionRight, Relation):
             rel2 = subExpressionRight
+            self.SPJRUD2 = False
         if isinstance(subExpressionRight, SPJRUD):
             rel2 = subExpressionRight.get_NewRelation()
+            self.SPJRUD2 = True
 
         valid_Union(rel, rel2)
         
@@ -31,12 +35,22 @@ class Union(SPJRUD):
 
         self.set_NewRelation()
         self.set_SQL()
+
+    def __str__(self):
+        if not self.SPJRUD1 and not self.SPJRUD2:
+            return "Union(Relation('" + self.firstRelation.__str__() + "'), Relation('" + self.secondRelation.__str__() + "'))"
+        if self.SPJRUD1 and not self.SPJRUD2:
+            return "Union(" + self.firstRelation.__str__() + ", Relation('" + self.secondRelation.__str__() + "'))"
+        if not self.SPJRUD1 and self.SPJRUD2:
+            return "Union(Relation('" + self.firstRelation.__str__() + "'), " + self.secondRelation.__str__() + ")"
+        if self.SPJRUD1 and self.SPJRUD2:
+            return "Union(" + self.firstRelation.__str__() + ", " + self.secondRelation.__str__() + ")"
     
     def set_NewRelation(self):
         """
         Crée une nouvelle relation apres avoir effectuer l'opérateur Union
         """
-        self.newRelation = Relation(self.firstRelation.get_Name(), self.firstRelation.get_Attributes())
+        self.newRelation = Relation(self.firstRelation.get_Name(), self.firstRelation.get_Attributes(), SPJRUD=self.__str__())
 
     def get_NewRelation(self):
         """
