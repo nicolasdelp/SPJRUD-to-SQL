@@ -21,7 +21,7 @@ class Difference(SPJRUD):
             rel = subExpressionLeft.get_NewRelation()
             self.SPJRUD1 = True
         else:
-            raise Exception("Le premier parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
+            raise Exception("SPJRUD -> Difference : Le premier parametre doit etre du type \'Relation\' ou etre un operateur SPJRUD")
 
         if isinstance(subExpressionRight, Relation):
             rel2 = subExpressionRight
@@ -30,7 +30,7 @@ class Difference(SPJRUD):
             rel2 = subExpressionRight.get_NewRelation()
             self.SPJRUD2 = True
         else:
-            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
+            raise Exception("SPJRUD -> Difference : Le second parametre doit etre du type \'Relation\' ou etre un operateur SPJRUD")
 
         valid_Difference(rel, rel2)
 
@@ -41,6 +41,9 @@ class Difference(SPJRUD):
         self.set_SQL()
 
     def __str__(self):
+        """
+        Méthode qui retourne l'opérateur sous forme d'une chaine de caractère
+        """
         if not self.SPJRUD1 and not self.SPJRUD2:
             return "Difference(Relation('" + self.firstRelation.__str__() + "'), Relation('" + self.secondRelation.__str__() + "'))"
         if self.SPJRUD1 and not self.SPJRUD2:

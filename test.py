@@ -10,8 +10,6 @@ from Representation.Constante import Constante
 from Representation.Attribute import Attribute
 from Representation.Relation import Relation
 
-from Representation.Node import Node
-
 
 #---EQUAL---#
 # a = Constante("Constante")
@@ -88,17 +86,17 @@ Exception: Cet attribut n'existe pas dans la relation
 #             Attribute("attribute3", 'TEXT'), 
 #             Attribute("attribute4", 'TEXT')])).get_Relation()).get_SQL()[0])
 
-x = Project(['attribute', 'attribute2'], 
-    Select(Equal("attribute","caca"), 
-        Relation("relation", 
-            [Attribute("attribute", 'TEXT'), 
-            Attribute("attribute2", 'TEXT'), 
-            Attribute("attribute3", 'TEXT'), 
-            Attribute("attribute4", 'TEXT')])).get_NewRelation())
+# x = Project(['attribute', 'attribute2'], 
+#     Select(Equal("attribute","caca"), 
+#         Relation("relation", 
+#             [Attribute("attribute", 'TEXT'), 
+#             Attribute("attribute2", 'TEXT'), 
+#             Attribute("attribute3", 'TEXT'), 
+#             Attribute("attribute4", 'TEXT')])).get_NewRelation())
 
-print(x.get_CleanSQL())
+# print(x.get_CleanSQL())
 
-print(x.get_SQL())
+# print(x.get_SQL())
 
 # print(Project(['attribute', 'attribute2'], 
 #     Select(Equal("attribute","caca"), 
@@ -121,3 +119,5 @@ print(x.get_SQL())
 # Union(firstRel2, secondRel2).print_SQL()
 
 # Difference(firstRel2, secondRel2).print_SQL()
+
+# Select("Nicolas", firstRel)

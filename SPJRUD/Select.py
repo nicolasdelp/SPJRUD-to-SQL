@@ -7,6 +7,9 @@ from Representation.Constante import Constante
 
 from SPJRUD.Validation import *
 
+import sys
+sys.tracebacklimit = 0
+
 class Select(SPJRUD):
 
     def __init__(self, subExpressionLeft, subExpressionRight):
@@ -24,7 +27,7 @@ class Select(SPJRUD):
             rel = subExpressionRight.get_NewRelation()
             self.SPJRUD = True
         else:
-            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
+            raise Exception("SPJRUD -> Select : Le second parametre doit etre du type \'Relation\' ou etre un operateur \'SPJRUD\'")
 
         valid_Select(subExpressionLeft, rel)
         
@@ -35,6 +38,9 @@ class Select(SPJRUD):
         self.set_SQL()
 
     def __str__(self):
+        """
+        Méthode qui retourne l'opérateur sous forme d'une chaine de caractère
+        """
         if not self.SPJRUD:
             return "Select(" + self.operation.__str__() + ", Relation('" + self.relation.__str__() + "'))"
         if self.SPJRUD:

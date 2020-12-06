@@ -24,7 +24,7 @@ class Rename(SPJRUD):
             rel = subExpressionRight.get_NewRelation()
             self.SPJRUD = True
         else:
-            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
+            raise Exception("SPJRUD -> Rename : Le second parametre doit etre du type \'Relation\' ou etre un operateur SPJRUD")
 
         valid_Rename(oldName, newName, rel)
 
@@ -36,6 +36,9 @@ class Rename(SPJRUD):
         self.set_SQL()
 
     def __str__(self):
+        """
+        Méthode qui retourne l'opérateur sous forme d'une chaine de caractère
+        """
         if not self.SPJRUD:
             return "Rename('" + self.oldName + "', '" + self.newName + "', Relation('" + self.relation.__str__() + "'))"
 

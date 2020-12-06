@@ -21,7 +21,7 @@ class Project(SPJRUD):
             rel = subExpressionRight.get_NewRelation()
             self.SPJRUD = True
         else:
-            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
+            raise Exception("SPJRUD -> Project : Le second parametre doit etre du type \'Relation\' ou etre un operateur SPJRUD")
 
         valid_Project(listOfParameters, rel)
 
@@ -32,6 +32,9 @@ class Project(SPJRUD):
         self.set_SQL()
     
     def __str__(self):
+        """
+        Méthode qui retourne l'opérateur sous forme d'une chaine de caractère
+        """
         if not self.SPJRUD:
             return "Project(['" + "', '".join(self.listOfParameters) + "'], Relation('" + self.relation.__str__() + "'))"
         if self.SPJRUD:

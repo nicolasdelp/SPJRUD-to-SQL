@@ -24,6 +24,7 @@ w = Relation(
             ])
 
 a = Project(['attribute2', 'attribute4'], w) #Créer une expression SPJRUD
+b = Select(Equal("attribute1", Constante("Nicolas")), "Nico")
 print(a) #Donne l'expression SPJRUD
 print(" ")
 print(a.get_SQL()) #Affiche la requete SQL
@@ -32,20 +33,20 @@ print(" ")
 
 
 #---------------- A PARTIR D'UNE BASE DE DONNEE ----------------#
-creat_Database("database") #Créé la base de donnée des TPs SQL pour faire des test
+# creat_Database("database") #Créé la base de donnée des TPs SQL pour faire des test
 
-print_TableFromADatabase("database.db", "emp") #Affiche le contenu d'une table
+# print_TableFromADatabase("database.db", "emp") #Affiche le contenu d'une table
 
-x = creat_RelationFromDatabase("database.db", "emp2") #Créé une relation à partir d'une table
-y = creat_RelationFromDatabase("database.db", "emp") #Créé une relation à partir d'une table
-z = creat_RelationFromDatabase("database.db", "dept") #Créé une relation à partir d'une table
+# x = creat_RelationFromDatabase("database.db", "emp2") #Créé une relation à partir d'une table
+# y = creat_RelationFromDatabase("database.db", "emp") #Créé une relation à partir d'une table
+# z = creat_RelationFromDatabase("database.db", "dept") #Créé une relation à partir d'une table
 
-b = Project(["ename", "sal", "deptno"], y) #Créer une expression SPJRUD
-print(b) #Donne l'expression SPJRUD
-print(" ")
-print(b.get_SQL()) #Affiche la requete SQL
-print(" ")
-executeSQL_OnDatabase("database.db", b.get_SQL()) #Execute une requete SQL sur une base de donnée
+# b = Project(["ename", "sal", "deptno"], y) #Créer une expression SPJRUD
+# print(b) #Donne l'expression SPJRUD
+# print(" ")
+# print(b.get_SQL()) #Affiche la requete SQL
+# print(" ")
+# executeSQL_OnDatabase("database.db", b.get_SQL()) #Execute une requete SQL sur une base de donnée
 
 
 
