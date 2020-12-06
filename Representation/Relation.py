@@ -6,6 +6,9 @@ __email__ = "nicolas.delplanque@student.umons.ac.be"
 
 from Representation.Attribute import Attribute
 
+import sys
+sys.tracebacklimit = 0
+
 class Relation:
 
     def __init__(self, relation_name, list_attributes, SPJRUD=""):
@@ -23,7 +26,7 @@ class Relation:
 
     def set_Name(self, relation_name):
         if not isinstance(relation_name, str):
-            raise Exception("Le nom de la relation doit etre du type \'str\'")
+            raise Exception("Relation : Le nom de la relation doit etre du type \'str\'")
 
         self.relation_name = relation_name
 
@@ -32,11 +35,11 @@ class Relation:
 
     def set_Attributes(self, list_attributes):
         if not isinstance(list_attributes, list):
-            raise Exception("Le parametre doit etre du type \'list\'")
+            raise Exception("Relation : Le parametre doit etre du type \'list\'")
         
         for att in list_attributes:
             if not isinstance(att, Attribute):
-                raise Exception("Les elements de la liste ne sont pas du type \'Attibute\'")
+                raise Exception("Relation : Les elements de la liste ne sont pas du type \'Attibute\'")
             
         self.list_attributes = list_attributes
 

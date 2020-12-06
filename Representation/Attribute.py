@@ -4,6 +4,9 @@ __version__ = "1.0.1"
 __maintainer__ = "Nicolas Delplanque"
 __email__ = "nicolas.delplanque@student.umons.ac.be"
 
+import sys
+sys.tracebacklimit = 0
+
 class Attribute:
 
     def __init__(self, attribute_name, attribute_type):
@@ -24,10 +27,10 @@ class Attribute:
         #TEXT = str & unicode | BLOB = buffer | REAL = float | INTEGER = int & long | NULL = none
 
         if not isinstance(attribute_type, str):
-            raise Exception("Le parametre doit etre une chaine de caracteres")
+            raise Exception("Attribute : Le parametre doit etre une chaine de caracteres")
 
         if attribute_type.upper() not in type_available:
-            raise Exception("Le type n\'est pas valide")
+            raise Exception("Attribute : Le type n\'est pas valide")
 
         self.attribute_type = attribute_type
 
@@ -36,9 +39,9 @@ class Attribute:
 
     def isComparable(self, otherAttribute): #vérifie si 2 attributs sont comparables
         if not isinstance(otherAttribute, Attribute):
-            raise Exception("Le parametre doit etre du type \'Attribute\'")
+            raise Exception("Attribute : Le parametre doit etre du type \'Attribute\'")
 
         if self.attribute_type != otherAttribute.get_Type():
-            raise Exception("Les deux attributs ne sont pas du meme type -> (" + self.attribute_type + ") != (" + otherAttribute.get_Type + ")")
+            raise Exception("Attribute : Les deux attributs ne sont pas du meme type -> (" + self.attribute_type + ") != (" + otherAttribute.get_Type + ")")
 
         return True

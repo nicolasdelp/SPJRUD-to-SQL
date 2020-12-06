@@ -8,15 +8,18 @@ from Ope.Ope import Ope
 from Representation.Attribute import Attribute
 from Representation.Constante import Constante
 
+import sys
+sys.tracebacklimit = 0
+
 class Equal(Ope):
     
     def __init__(self, attributeLeft, attributeRight): #Left = attribut | Right = constante ou attribut
         if not isinstance(attributeLeft, str):
-            raise Exception("Le premier parametre doit etre du type \'str\'")
+            raise Exception("Ope -> Equal : Le premier parametre doit etre du type \'str\'")
 
         if not isinstance(attributeRight, str):
             if not isinstance(attributeRight, Constante):
-                raise Exception("Le deuxieme parametre doit etre du type \'str\' ou \'Constante\'")
+                raise Exception("Ope -> Equal : Le deuxieme parametre doit etre du type \'str\' ou \'Constante\'")
         
         self.attributeLeft = attributeLeft
         self.attributeRight = attributeRight
