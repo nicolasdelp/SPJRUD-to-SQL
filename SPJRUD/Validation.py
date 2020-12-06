@@ -3,6 +3,7 @@ from Ope.Ope import Ope
 from Ope.Equal import Equal
 from Representation.Relation import Relation
 from Representation.Attribute import Attribute
+from Representation.Constante import Constante
 
 def valid_Select(param1, param2):
     """
@@ -29,7 +30,7 @@ def valid_Select(param1, param2):
         if param1.return_NameList()[1] not in names: #on vérifie que l'argument existe dans la relation
             raise Exception("L\'attribut de droite de l'egalite n\'existe pas dans la relation")
         
-        #on vérifie que les 2 attributs sont du même type
+        #on vérifie que les 2 attributs sont du même type -----------------------------------------------------------------
         attributes = []
         for att in param2.get_Attributes():
             if att.get_Name() in param1.return_NameList():
@@ -37,6 +38,11 @@ def valid_Select(param1, param2):
         
         if attributes[0].get_Type() != attributes[1].get_Type():
             raise Exception("Le type des 2 arguments ne sont pas compatible")
+    
+    if isinstance(param1.get_AttributeRight(), Constante):
+        if not isinstance(param1.get_AttributeRight().get_Value(), type(param1.get_AttributeLeft())):
+            raise Exception("Le type des 2 arguments ne sont pas compatible")
+
   
 def valid_Project(param1, param2):
     """

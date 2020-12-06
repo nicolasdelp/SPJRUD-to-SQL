@@ -13,7 +13,7 @@ from Representation.Relation import Relation
 from sql import *
 
 # creat_Database("database")
-# print_Databases("database.db")
+# print_TableFromADatabase("database.db", "emp")
 # for x in get_AttributesFromTable("database.db", "emp"):
 #     print(x)
 
@@ -35,7 +35,7 @@ e = Union(x, y)
 
 f = Difference(x, y)
 
-g = Join(Project(["sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y))), z)
+g = Join(Project(["name", "sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y))), z)
 
 
 sql = g.get_SQL()

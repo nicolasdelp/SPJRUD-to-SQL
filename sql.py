@@ -128,7 +128,7 @@ def creat_Database(name):
     #interruption de la connexion
     connection.close()
 
-def print_Databases(database, table):
+def print_TableFromADatabase(database, table):
     """
     Affiche tout le contenu des 3 tables de la base de donnée dans la console
     - database = la base de donnée
