@@ -29,6 +29,8 @@ print(" ")
 print(a.get_SQL()) #Affiche la requete SQL
 print(" ")
 
+
+
 #---------------- A PARTIR D'UNE BASE DE DONNEE ----------------#
 creat_Database("database") #Créé la base de donnée des TPs SQL pour faire des test
 
