@@ -20,9 +20,11 @@ class Select(SPJRUD):
         if isinstance(subExpressionRight, Relation):
             rel = subExpressionRight
             self.SPJRUD = False
-        if isinstance(subExpressionRight, SPJRUD):
+        elif isinstance(subExpressionRight, SPJRUD):
             rel = subExpressionRight.get_NewRelation()
             self.SPJRUD = True
+        else:
+            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
 
         valid_Select(subExpressionLeft, rel)
         
@@ -34,15 +36,9 @@ class Select(SPJRUD):
 
     def __str__(self):
         if not self.SPJRUD:
-            if isinstance(self.operation.get_AttributeRight(), Constante):
-                return "Select(Equal('" + self.operation.return_NameList()[0] + "', Constante('" + self.operation.return_NameList()[1] + "')), Relation('" + self.relation.__str__() + "'))"
-            else:
-                return "Select(Equal('" + self.operation.return_NameList()[0] + "', " + self.operation.return_NameList()[1] + "), Relation('" + self.relation.__str__() + "'))"
+            return "Select(" + self.operation.__str__() + ", Relation('" + self.relation.__str__() + "'))"
         if self.SPJRUD:
-            if isinstance(self.operation.get_AttributeRight(), Constante):
-                return "Select(Equal('" + self.operation.return_NameList()[0] + "', Constante('" + self.operation.return_NameList()[1] + "')), " + self.relation.__str__() + ")"
-            else:
-                return "Select(Equal('" + self.operation.return_NameList()[0] + "', " + self.operation.return_NameList()[1] + "), " + self.relation.__str__() + ")"
+            return "Select(" + self.operation.__str__() + ", " + self.relation.__str__() + ")"
 
     def set_NewRelation(self):
         """

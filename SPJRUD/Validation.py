@@ -30,7 +30,7 @@ def valid_Select(param1, param2):
         if param1.return_NameList()[1] not in names: #on vérifie que l'argument existe dans la relation
             raise Exception("L\'attribut de droite de l'egalite n\'existe pas dans la relation")
         
-        #on vérifie que les 2 attributs sont du même type -----------------------------------------------------------------
+        #on vérifie que les 2 attributs sont du même type
         attributes = []
         for att in param2.get_Attributes():
             if att.get_Name() in param1.return_NameList():

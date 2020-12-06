@@ -20,9 +20,11 @@ class Rename(SPJRUD):
         if isinstance(subExpressionRight, Relation):
             rel = subExpressionRight
             self.SPJRUD = False
-        if isinstance(subExpressionRight, SPJRUD):
+        elif isinstance(subExpressionRight, SPJRUD):
             rel = subExpressionRight.get_NewRelation()
             self.SPJRUD = True
+        else:
+            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
 
         valid_Rename(oldName, newName, rel)
 

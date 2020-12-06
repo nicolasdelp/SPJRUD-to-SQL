@@ -5,43 +5,46 @@ from SPJRUD.Join import Join
 from SPJRUD.Rename import Rename
 from SPJRUD.Union import Union
 from SPJRUD.Difference import Difference
-
 from Ope.Equal import Equal
-
 from Representation.Constante import Constante
 from Representation.Attribute import Attribute
 from Representation.Relation import Relation
-from Representation.Node import Node
 
-import sqlite3
+from sql import *
 
-def requestOnDatabase(database, SPJRUD):
-    #connexion à la base de donnée
-    connection = sqlite3.connect(database + ".db")
-    cursor = connection.cursor()
 
-    for row in cursor.execute(SPJRUD.print_SQL()):
-        print(row)
-    
-    #interruption de la connexion
-    connection.close()
+#---------------- A PARTIR D'UNE STUCTURE ----------------#
+w = Relation(
+    "NomDeLaRelation", 
+            [
+                Attribute("attribute1", 'TEXT'), 
+                Attribute("attribute2", 'TEXT'), 
+                Attribute("attribute3", 'TEXT'), 
+                Attribute("attribute4", 'TEXT')
+            ])
 
-def getAttributesFromTable(databaseName, table) :
-    #connexion à la base de donnée
-    connection = sqlite3.connect(databaseName + ".db")
-    cursor = connection.cursor()
+a = Project(['attribute2', 'attribute4'], w) #Créer une expression SPJRUD
+print(a) #Donne l'expression SPJRUD
+print(" ")
+print(a.get_SQL()) #Affiche la requete SQL
+print(" ")
 
-    #récupère les caractéristique des colonnes
-    infos = cursor.execute("PRAGMA table_info(" + table + ");")
-    
-    #attributes = []
-    for tup in infos :
-        print(tup)
-        #attributes.append(Attribute(tup[1], tup[2]))
-    
-    #return attributes or False
+#---------------- A PARTIR D'UNE BASE DE DONNEE ----------------#
+creat_Database("database") #Créé la base de donnée des TPs SQL pour faire des test
 
-# x = Equal(Attribute("ename", 'TEXT'), Constante("BLAKE"))
-# y = Relation("emp", )
+print_TableFromADatabase("database.db", "emp") #Affiche le contenu d'une table
 
-# requestOnDatabase("database", Select())
+x = creat_RelationFromDatabase("database.db", "emp2") #Créé une relation à partir d'une table
+y = creat_RelationFromDatabase("database.db", "emp") #Créé une relation à partir d'une table
+z = creat_RelationFromDatabase("database.db", "dept") #Créé une relation à partir d'une table
+
+b = Project(["ename", "sal", "deptno"], y) #Créer une expression SPJRUD
+print(b) #Donne l'expression SPJRUD
+print(" ")
+print(b.get_SQL()) #Affiche la requete SQL
+print(" ")
+executeSQL_OnDatabase("database.db", b.get_SQL()) #Execute une requete SQL sur une base de donnée
+
+
+
+

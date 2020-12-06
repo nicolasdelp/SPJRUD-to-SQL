@@ -17,16 +17,20 @@ class Difference(SPJRUD):
         if isinstance(subExpressionLeft, Relation):
             rel = subExpressionLeft
             self.SPJRUD1 = False
-        if isinstance(subExpressionLeft, SPJRUD):
+        elif isinstance(subExpressionLeft, SPJRUD):
             rel = subExpressionLeft.get_NewRelation()
             self.SPJRUD1 = True
+        else:
+            raise Exception("Le premier parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
 
         if isinstance(subExpressionRight, Relation):
             rel2 = subExpressionRight
             self.SPJRUD2 = False
-        if isinstance(subExpressionRight, SPJRUD):
+        elif isinstance(subExpressionRight, SPJRUD):
             rel2 = subExpressionRight.get_NewRelation()
             self.SPJRUD2 = True
+        else:
+            raise Exception("Le second parametre doit etre du type \'Relation\' ou un operateur SPJRUD")
 
         valid_Difference(rel, rel2)
 

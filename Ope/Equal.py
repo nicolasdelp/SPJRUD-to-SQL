@@ -16,6 +16,12 @@ class Equal(Ope):
         self.attributeRight = attributeRight
         self.sign = " = "
 
+    def __str__(self):
+        if isinstance(self.attributeRight, Constante):
+            return "Equal('" + self.attributeLeft + "', Constante('" + self.attributeRight.get_Value() + "'))"
+        else:
+            return "Equal('" + self.attributeLeft + "', '" + self.attributeRight + "')"
+
     def get_AttributeLeft(self):
         return self.attributeLeft
 
