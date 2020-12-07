@@ -42,7 +42,7 @@ Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** 
 
 ### 7. Utilisation de la librairie
 
-`Main.py`
+Ouvrez le fichier `Main.py` à la racine du projet et utilisez les méthodes ci-dessous :
 
 **INSTANCIER UNE RELATION SOI-MEME**
 
