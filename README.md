@@ -26,7 +26,7 @@ SQL est un langage informatique normalisé servant à exploiter des bases de don
 [Wikipédia](https://fr.wikipedia.org/wiki/Structured_Query_Language#:~:text=SQL%20(sigle%20de%20Structured%20Query,des%20bases%20de%20donn%C3%A9es%20relationnelles.)) 
 
 ### 4. Organisation de la librairie
-La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD**.
+La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD** ainsi que 2 fichiers, `sql.py` et `main.py`
 
 + **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autre (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
 
@@ -68,28 +68,28 @@ rel = creat_RelationFromDatabase("database.db", "table")
 **Instancier les opérateurs SPJRUD**
 
 ```python
-s1 = Select(Equal("attribute3", "Nicolas"), relation)
-s2 = Select(Equal("attribute2", Constante(3.141592653589)), relation)
+s1 = Select(Equal("attribute3", "attribute2"), relation) #retourne les tuples ayant la même valeur dans les 2 attributs
+s2 = Select(Equal("attribute2", Constante(3.141592653589)), relation) #retourne les éléments de l'attribut ayant comme valeur la constante
 ```
 
 ```python
-p = Project(['attribute2', 'attribute4'], relation)
+p = Project(['attribute2', 'attribute4'], relation) #retourne tout les tuples avec seulement ces attributs
 ```
 
 ```python
-j = Join(firstRelation, secondRelation)
+j = Join(firstRelation, secondRelation) #retourne la jointure des 2 relations si au moins 1 attribut correspond dans les 2 relations
 ```
 
 ```python
-r = Rename("oldName", "newName", relation)
+r = Rename("oldName", "newName", relation) #renomme un attribut d'une relation
 ```
 
 ```python
-u = Union(firstRelation, secondRelation)
+u = Union(firstRelation, secondRelation) #retourne l'union des 2 relations si elles ont les mêmes attributs et supprime les doublons
 ```
 
 ```python
-d = Difference(firstRelation, secondRelation)
+d = Difference(firstRelation, secondRelation) #retourne la difference des 2 relations si elles ont les mêmes attributs
 ```
 
 **Instancier un opérateur SPJRUD de manière récursive**
