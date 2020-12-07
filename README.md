@@ -72,7 +72,7 @@ s2 = Select(Equal("attribute2", Constante(3.141592653589)), relation)
 ```
 
 ```python
-#retourne tout les tuples avec seulement ces attributs
+#retourne tout les tuples avec seulement ces attributs et supprime les doublons
 p = Project(['attribute2', 'attribute4'], relation)
 ```
 
