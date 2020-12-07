@@ -89,6 +89,12 @@ u = Union(firstRelation, secondRelation)
 d = Difference(firstRelation, secondRelation)
 ```
 
+```python
+a = Project(["name", "sal", "job", "deptno"], firstRelation)
+b = Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation)))
+j = Join(a, b)
+```
+
 **AFFICHER L'EXPRESSION SPJRUD A LA CONSOLE**
 
 ```python
