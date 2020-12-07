@@ -4,8 +4,7 @@
 
 ### 1. Présentation du projet
 L’objectif de ce projet est d’implémenter en [Python](https://www.python.org/) un outil de traduction de requêtes SPJRUD vers des requêtes SQL. 
-Il sera aussi possible d'exécuter une requête SQL (ayant été traduite en amont d'une requête SPJRUD) sur une base de données 
-grâce à la librairie Python [SQLite](https://docs.python.org/3/library/sqlite3.html) après un certain nombre de vérifications.
+Il est aussi possible d'exécuter une requête SQL (ayant été traduite d'une requête SPJRUD en amont) sur une base de données grâce à la librairie Python [SQLite](https://docs.python.org/3/library/sqlite3.html).
 
 ### 2. SPJRUD c'est quoi ?
 **SPJRUD** est un acronyme pour :
@@ -26,19 +25,19 @@ SQL est un langage informatique normalisé servant à exploiter des bases de don
 [Wikipédia](https://fr.wikipedia.org/wiki/Structured_Query_Language#:~:text=SQL%20(sigle%20de%20Structured%20Query,des%20bases%20de%20donn%C3%A9es%20relationnelles.)) 
 
 ### 4. Organisation de la librairie
-La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD** ainsi que 2 fichiers, `sql.py` et `main.py`
+La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD** ainsi que 2 fichiers, `sql.py` et `main.py`.
 
-+ **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autre (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
++ **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autres (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
 
-+ **Representation** : le package Representation représente tout ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constitue la relation, mais aussi une constante qui peuvent être utilisé avec l'opérateur Select qui recherche dans un attribut un élément bien particulier.
++ **Representation** : le package Representation représente tout ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constitue la relation, mais aussi une constante qui peut être utilisé avec l'opérateur Select.
 
 + **SPJRUD** : le package SPJRUD représente, comme son nom l'indique, chaque opérateur de l'algèbre relationnelle.
 
 + `sql.py` : ce fichier contient les méthodes a utiliser lorsque l'on applique les opérateurs SPJRUD sur une base de données.
 
-+ `main.py` : ce fichier est l'entrée de la librairie, c'est ici que l'utilisateur doit instancier ses relations, ses opérateurs SPJRUD ainsi qu'utiliser les méthodes s'appliquant à une base de données SQLite.
++ `main.py` : ce fichier est l'entrée de la librairie, c'est ici que l'utilisateur doit instancier ses relations, ses opérateurs SPJRUD et c'est aussi ici qu'il peut utiliser les méthodes s'appliquant à une base de données SQLite.
 
-Une implémentation comme celle-ci permet la modularité de la librairie, il est très simple de rajouter des classes dans chaque "package"
+Une implémentation comme celle-ci permet la modularité de la librairie, il est très simple de rajouter des classes dans chaque "package".
 
 ### 5. Utilisation de la librairie
 
@@ -65,28 +64,36 @@ rel = creat_RelationFromDatabase("database.db", "table")
 **Instancier les opérateurs SPJRUD**
 
 ```python
-s1 = Select(Equal("attribute3", "attribute2"), relation) #retourne les tuples ayant la même valeur dans les 2 attributs
-s2 = Select(Equal("attribute2", Constante(3.141592653589)), relation) #retourne les éléments de l'attribut ayant comme valeur la constante
+#retourne les tuples ayant la même valeur dans les 2 attributs
+s1 = Select(Equal("attribute3", "attribute2"), relation)
+
+#retourne les éléments de l'attribut ayant comme valeur la constante
+s2 = Select(Equal("attribute2", Constante(3.141592653589)), relation)
 ```
 
 ```python
-p = Project(['attribute2', 'attribute4'], relation) #retourne tout les tuples avec seulement ces attributs
+#retourne tout les tuples avec seulement ces attributs
+p = Project(['attribute2', 'attribute4'], relation)
 ```
 
 ```python
-j = Join(firstRelation, secondRelation) #retourne la jointure des 2 relations si au moins 1 attribut correspond dans les 2 relations
+#retourne la jointure des 2 relations si au moins 1 attribut correspond dans les 2 relations
+j = Join(firstRelation, secondRelation)
 ```
 
 ```python
-r = Rename("oldName", "newName", relation) #renomme un attribut d'une relation
+#renomme un attribut d'une relation
+r = Rename("oldName", "newName", relation)
 ```
 
 ```python
-u = Union(firstRelation, secondRelation) #retourne l'union des 2 relations si elles ont les mêmes attributs et supprime les doublons
+#retourne l'union des 2 relations si elles ont les mêmes attributs et supprime les doublons
+u = Union(firstRelation, secondRelation)
 ```
 
 ```python
-d = Difference(firstRelation, secondRelation) #retourne la difference des 2 relations si elles ont les mêmes attributs
+#retourne la difference des 2 relations si elles ont les mêmes attributs
+d = Difference(firstRelation, secondRelation)
 ```
 
 **Instancier un opérateur SPJRUD de manière récursive**
@@ -101,7 +108,8 @@ j = Join(a, b)
 **Afficher l'expression SPJRUD dans la console**
 
 ```python
-print(Select(Equal("attribute3", "Nicolas"), relation))
+s = Select(Equal("attribute3", "Nicolas"), relation)
+print(s)
 ```
 ```
 >> Select(Equal('attribute3', 'Nicolas'), Relation('RelationName'))
@@ -110,7 +118,8 @@ print(Select(Equal("attribute3", "Nicolas"), relation))
 **Afficher l'expression SQL dans la console**
 
 ```python
-print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
+s = Select(Equal("attribute3", "Nicolas"), relation)
+print(s.get_SQL())
 ```
 ```
 >> SELECT * FROM (RelationName) WHERE attribute3 = "Nicolas"
@@ -119,7 +128,11 @@ print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
 **Exécuter une requête SQL sur une base de données (ici dans BDD des TPs pour l'exemple)**
 
 ```python
-executeSQL_OnDatabase("database.db", Project(["name", "sal", "job", "deptno"], Select(Equal("sal", Constante(5000.0)), Rename("ename", "name", creat_RelationFromDatabase("database.db", "emp")))).get_SQL())
+rel = creat_RelationFromDatabase("database.db", "emp")
+
+sql = Project(["name", "sal", "job", "deptno"], Select(Equal("sal", Constante(5000.0)), Rename("ename", "name", rel))).get_SQL()
+
+executeSQL_OnDatabase("database.db", sql)
 ```
 ```
 >> ('KING', 5000.0, 'PRESIDENT', 10)
