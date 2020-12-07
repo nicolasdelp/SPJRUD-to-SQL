@@ -56,7 +56,7 @@ rel = Relation(
             ])
 ```
 
-**INSTANCIER UNE RELATION A PARTIR D'UNE BASE DE DONNEE**
+**INSTANCIER UNE RELATION A PARTIR DE LA TABLE D'UNE BASE DE DONNEE**
 
 ```python
 rel = creat_RelationFromDatabase("database.db", "table")
