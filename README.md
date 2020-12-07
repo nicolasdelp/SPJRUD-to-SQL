@@ -2,5 +2,5 @@
 
 ##### par Delplanque Nicolas
 
-### ⋅⋅* Présenatation du projet
+### 1. Présenatation du projet
 **S**elect - **P**roject - **J**oin - **R**ename - **U**nion - **D**ifference
