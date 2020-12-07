@@ -25,8 +25,8 @@ SQL est un langage informatique normalisé servant à exploiter des bases de don
 
 [Wikipédia](https://fr.wikipedia.org/wiki/Structured_Query_Language#:~:text=SQL%20(sigle%20de%20Structured%20Query,des%20bases%20de%20donn%C3%A9es%20relationnelles.)) 
 
-### 4. Mes choix d'implémentation
-Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD**.
+### 4. Organisation de la librairie
+La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD**.
 
 + **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autre (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
 
@@ -34,13 +34,12 @@ Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** 
 
 + **SPJRUD** : le package SPJRUD représente, comme son nom l'indique, chaque opérateur de l'algèbre relationnelle.
 
-### 5. Difficultés rencontrées
+Une implémentation comme celle-ci permet la modularité de la librairie, il est très simple de rajouter des classes dans chaque "package"
+
+### 5. Mes choix d'implémentation
 
 
-### 6. Solutions apportées
-
-
-### 7. Utilisation de la librairie
+### 6. Utilisation de la librairie
 
 Ouvrez le fichier `Main.py` à la racine du projet et utilisez les méthodes ci-dessous à l'intérieur :
 
@@ -66,7 +65,7 @@ rel = creat_RelationFromDatabase("database.db", "table")
 
 ```python
 s1 = Select(Equal("attribute3", "Nicolas"), relation)
-s2 = Select(Equal("attribute2", Constante(3.141592653589)), rel)
+s2 = Select(Equal("attribute2", Constante(3.141592653589)), relation)
 ```
 
 ```python
@@ -114,4 +113,13 @@ print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
 ```
 ```
 >> SELECT * FROM (RelationName) WHERE attribute3 = "Nicolas"
+```
+
+**Exécuter une requête SQL sur une base de données (BDD des**
+
+```python
+executeSQL_OnDatabase("database.db", Project(["name", "sal", "job", "deptno"], Select(Equal("sal", Constante(5000.0)), Rename("ename", "name", creat_RelationFromDatabase("database.db", "emp")))).get_SQL())
+```
+```
+>> ('KING', 5000.0, 'PRESIDENT', 10)
 ```
