@@ -42,3 +42,7 @@ Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** 
 
 ### 7. Utilisation de la librairie
 
+```
+No language indicated, so no syntax highlighting. 
+But let's throw in a <b>tag</b>.
+```
