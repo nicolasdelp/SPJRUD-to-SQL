@@ -39,6 +39,8 @@ La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SP
 
 Une implémentation comme celle-ci permet la modularité de la librairie, il est très simple de rajouter des classes dans chaque "package".
 
+**Le code a été commenté pour une meilleur compéhension du code**
+
 ### 5. Utilisation de la librairie
 
 Ouvrez le fichier `Main.py` à la racine du projet et utilisez les méthodes ci-dessous à l'intérieur :
