@@ -89,8 +89,10 @@ u = Union(firstRelation, secondRelation)
 d = Difference(firstRelation, secondRelation)
 ```
 
+**INSTANCIER UN OPERATEUR SPJRUD DE MANIERE RECURSIVE**
+
 ```python
-Join(Project(["name", "sal", "job", "deptno"], firstRelation), Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation))))
+j = Join(Project(["name", "sal", "job", "deptno"], firstRelation), Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation))))
 ```
 
 **AFFICHER L'EXPRESSION SPJRUD A LA CONSOLE**
