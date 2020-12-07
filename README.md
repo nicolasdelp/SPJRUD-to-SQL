@@ -115,7 +115,7 @@ print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
 >> SELECT * FROM (RelationName) WHERE attribute3 = "Nicolas"
 ```
 
-**Exécuter une requête SQL sur une base de données (BDD des**
+**Exécuter une requête SQL sur une base de données (BDD des TPs)**
 
 ```python
 executeSQL_OnDatabase("database.db", Project(["name", "sal", "job", "deptno"], Select(Equal("sal", Constante(5000.0)), Rename("ename", "name", creat_RelationFromDatabase("database.db", "emp")))).get_SQL())
