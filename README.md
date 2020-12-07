@@ -20,6 +20,7 @@ En algèbre relationnelle, ces 6 opérateurs permettent d'effectuer des opérati
 **S**tructured **Q**uery **L**anguage
 
 SQL est un langage informatique normalisé servant à exploiter des bases de données relationnelles. SQL permet de rechercher, d'ajouter, de modifier ou de supprimer des données dans les bases de données relationnelles. 
+
 -> cfr. [Wikipédia](https://fr.wikipedia.org/wiki/Structured_Query_Language#:~:text=SQL%20(sigle%20de%20Structured%20Query,des%20bases%20de%20donn%C3%A9es%20relationnelles.)) 
 
 ### 4. Mes choix d'implémentation
