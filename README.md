@@ -92,7 +92,10 @@ d = Difference(firstRelation, secondRelation)
 **INSTANCIER UN OPERATEUR SPJRUD DE MANIERE RECURSIVE**
 
 ```python
-j = Join(Project(["name", "sal", "job", "deptno"], firstRelation), Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation))))
+a = Project(["name", "sal", "job", "deptno"], firstRelation)
+b = Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation)))
+
+j = Join(a, b)
 ```
 
 **AFFICHER L'EXPRESSION SPJRUD A LA CONSOLE**
