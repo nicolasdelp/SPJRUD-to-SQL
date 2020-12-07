@@ -27,3 +27,12 @@ SQL est un langage informatique normalisé servant à exploiter des bases de don
 
 ### 4. Mes choix d'implémentation
 
+
+### 5. Difficultés rencontrées
+
+
+### 6. Solutions apportées
+
+
+### 7. Utilisation de la librairie
+
