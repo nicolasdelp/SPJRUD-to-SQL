@@ -42,7 +42,67 @@ Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** 
 
 ### 7. Utilisation de la librairie
 
+`Main.py`
+
+**INSTANCIER UNE RELATION SOI-MEME**
+
+```python
+rel = Relation(
+        "RelationName", 
+            [
+                Attribute("attribute1", 'INTEGER'), 
+                Attribute("attribute2", 'REAL'), 
+                Attribute("attribute3", 'TEXT'),
+            ])
 ```
-No language indicated, so no syntax highlighting. 
-But let's throw in a <b>tag</b>.
+
+**INSTANCIER UNE RELATION A PARTIR D'UNE BASE DE DONNEE**
+
+```python
+rel = creat_RelationFromDatabase("database.db", "table")
+```
+
+**INSTANCIER LES OPERATEURS SPJRUD**
+
+```python
+s1 = Select(Equal("attribute3", "Nicolas"), relation)
+s2 = Select(Equal("attribute2", Constante(3.141592653589)), rel)
+```
+
+```python
+p = Project(['attribute2', 'attribute4'], relation)
+```
+
+```python
+j = Join(firstRelation, secondRelation)
+```
+
+```python
+r = Rename("oldName", "newName", relation)
+```
+
+```python
+u = Union(firstRelation, secondRelation)
+```
+
+```python
+d = Difference(firstRelation, secondRelation)
+```
+
+**AFFICHER L'EXPRESSION SPJRUD A LA CONSOLE**
+
+```python
+print(Select(Equal("attribute3", "Nicolas"), relation))
+```
+```
+>> Select(Equal('attribute3', 'Nicolas'), Relation('RelationName'))
+```
+
+**AFFICHER L'EXPRESSION SQL A LA CONSOLE**
+
+```python
+print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
+```
+```
+>> SELECT * FROM (RelationName) WHERE attribute3 = "Nicolas"
 ```

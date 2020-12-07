@@ -26,10 +26,9 @@ from sql import *
 #                 Attribute("attribute1", 'INTEGER'), 
 #                 Attribute("attribute2", 'TEXT'), 
 #                 Attribute("attribute3", 'TEXT'), 
-#                 Attribute("attribute4", 'TEXT')
 #             ])
 
-# a = Project(['attribute2', 'attribute4'], w) #Créer une expression SPJRUD
+# a = Project(['attribute2', 'attribute3'], w) #Créer une expression SPJRUD
 # b = Select(Equal("attribute1", Constante("qd")), w)
 # print(a) #Donne l'expression SPJRUD
 # print(" ")
