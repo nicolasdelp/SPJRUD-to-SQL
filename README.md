@@ -90,9 +90,7 @@ d = Difference(firstRelation, secondRelation)
 ```
 
 ```python
-a = Project(["name", "sal", "job", "deptno"], firstRelation)
-b = Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation)))
-j = Join(a, b)
+Join(Project(["name", "sal", "job", "deptno"], firstRelation), Project(["deptno", "departement", "loc"], Select(Equal("departement", Constante("RESEARCH")), Rename("dname", "departement", secondRelation))))
 ```
 
 **AFFICHER L'EXPRESSION SPJRUD A LA CONSOLE**
