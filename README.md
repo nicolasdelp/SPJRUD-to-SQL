@@ -77,7 +77,7 @@ p = Project(['attribute2', 'attribute4'], relation)
 ```
 
 ```python
-#retourne la jointure des 2 relations si au moins 1 attribut correspond dans les 2 relations
+#retourne la jointure des 2 relations si au moins 1 attribut en commun
 j = Join(firstRelation, secondRelation)
 ```
 
@@ -87,12 +87,12 @@ r = Rename("oldName", "newName", relation)
 ```
 
 ```python
-#retourne l'union des 2 relations si elles ont les mêmes attributs et supprime les doublons
+#retourne l'union des 2 relations si elles ont exactement les mêmes attributs
 u = Union(firstRelation, secondRelation)
 ```
 
 ```python
-#retourne la difference des 2 relations si elles ont les mêmes attributs
+#retourne la difference des 2 relations si elles ont exactement les mêmes attributs
 d = Difference(firstRelation, secondRelation)
 ```
 
