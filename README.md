@@ -30,9 +30,13 @@ La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SP
 
 + **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autre (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
 
-+ **Representation** : le package Representation représente ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constitue la relation, mais aussi une constante qui peuvent être utilisé avec l'opérateur Select qui recherche dans une relation un élément bien particulier.
++ **Representation** : le package Representation représente tout ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constitue la relation, mais aussi une constante qui peuvent être utilisé avec l'opérateur Select qui recherche dans un attribut un élément bien particulier.
 
 + **SPJRUD** : le package SPJRUD représente, comme son nom l'indique, chaque opérateur de l'algèbre relationnelle.
+
++ `sql.py` : ce fichier contient les méthodes a utiliser lorsque l'on applique les opérateurs SPJRUD sur une base de données.
+
++ `main.py` : ce fichier est l'entrée de la librairie, c'est ici que l'utilisateur doit instancier ses relations, ses opérateurs SPJRUD ainsi qu'utiliser les méthodes s'appliquant à une base de données SQLite.
 
 Une implémentation comme celle-ci permet la modularité de la librairie, il est très simple de rajouter des classes dans chaque "package"
 
