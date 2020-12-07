@@ -28,7 +28,7 @@ SQL est un langage informatique normalisé servant à exploiter des bases de don
 ### 4. Mes choix d'implémentation
 Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD**.
 
-+ **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" `Equal.py` a été implémenté. Il est très simple d'en rajouter d'autre (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
++ **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autre (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
 
 + **Representation** : le package Representation représente ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constitue la relation, mais aussi une constante qui peuvent être utilisé avec l'opérateur Select qui recherche dans une relation un élément bien particulier.
 
