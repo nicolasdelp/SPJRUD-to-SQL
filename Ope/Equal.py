@@ -27,7 +27,7 @@ class Equal(Ope):
 
     def __str__(self):
         if isinstance(self.attributeRight, Constante):
-            return "Equal('" + self.attributeLeft + "', Constante('" + self.attributeRight.get_Value() + "'))"
+            return "Equal('" + self.attributeLeft + "', Constante('" + str(self.attributeRight.get_Value()) + "'))"
         else:
             return "Equal('" + self.attributeLeft + "', '" + self.attributeRight + "')"
 

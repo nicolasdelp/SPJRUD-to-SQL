@@ -12,45 +12,62 @@ from Representation.Relation import Relation
 
 from sql import *
 
-# creat_Database("database")
+creat_Database("database")
 # print_TableFromADatabase("database.db", "emp")
-# for x in get_AttributesFromTable("database.db", "emp"):
-#     print(x)
 
 x = creat_RelationFromDatabase("database.db", "emp2")
 y = creat_RelationFromDatabase("database.db", "emp")
 z = creat_RelationFromDatabase("database.db", "dept")
 
-# a = Select(Equal("ename", "sal"), y)
+a = Select(Equal("ename", "job"), y)
+print(a)
+print(a.get_SQL())
+print("--------------------------------------------------------------")
 
 b = Project(["ename", "sal", "deptno"], y)
 print(b)
+print(b.get_SQL())
+print("--------------------------------------------------------------")
 
 bb = Project(["dname", "deptno", "loc"], z)
 print(bb)
+print(bb.get_SQL())
+print("--------------------------------------------------------------")
 
 c = Join(b, bb)
 print(c)
+print(c.get_SQL())
+print("--------------------------------------------------------------")
 
 d = Rename("ename", "Nom", y)
 print(d)
+print(d.get_SQL())
+print("--------------------------------------------------------------")
 
 e = Union(x, y)
 print(e)
+print(e.get_SQL())
+print("--------------------------------------------------------------")
 
 f = Difference(x, y)
 print(f)
+print(f.get_SQL())
+print("--------------------------------------------------------------")
 
 g = Join(Project(["name", "sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y))), z)
 print(g)
+print(g.get_SQL())
+print("--------------------------------------------------------------")
 
 h = Select(Equal("name", Constante("JAMES")),  Rename("ename", "name", y))
 print(h)
+print(h.get_SQL())
+print("--------------------------------------------------------------")
 
-i = Project(["name", "sal", "job", "deptno"], Select(Equal("name", Constante("JAMES")), Rename("ename", "name", y)))
+i = Project(["name", "sal", "job", "deptno"], Select(Equal("sal", Constante(5000.0)), Rename("ename", "name", y)))
 print(i)
+print(i.get_SQL())
+print("--------------------------------------------------------------")
 
 
-sql = g.get_SQL()
-
-# executeSQL_OnDatabase("database.db", sql)
+executeSQL_OnDatabase("database.db", i.get_SQL())

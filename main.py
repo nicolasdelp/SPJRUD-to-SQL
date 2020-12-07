@@ -20,26 +20,26 @@ from sql import *
 
 
 #---------------- A PARTIR D'UNE STUCTURE ----------------#
-w = Relation(
-    "NomDeLaRelation", 
-            [
-                Attribute("attribute1", 'TEXT'), 
-                Attribute("attribute2", 'TEXT'), 
-                Attribute("attribute3", 'TEXT'), 
-                Attribute("attribute4", 'TEXT')
-            ])
+# w = Relation(
+#     "NomDeLaRelation", 
+#             [
+#                 Attribute("attribute1", 'INTEGER'), 
+#                 Attribute("attribute2", 'TEXT'), 
+#                 Attribute("attribute3", 'TEXT'), 
+#                 Attribute("attribute4", 'TEXT')
+#             ])
 
-a = Project(['attribute2', 'attribute4'], w) #Créer une expression SPJRUD
-b = Select(Equal("attribute1", Constante("Nicolas")), "Nico")
-print(a) #Donne l'expression SPJRUD
-print(" ")
-print(a.get_SQL()) #Affiche la requete SQL
-print(" ")
+# a = Project(['attribute2', 'attribute4'], w) #Créer une expression SPJRUD
+# b = Select(Equal("attribute1", Constante("qd")), w)
+# print(a) #Donne l'expression SPJRUD
+# print(" ")
+# print(b.get_SQL()) #Affiche la requete SQL
+# print(" ")
 
 
 
 #---------------- A PARTIR D'UNE BASE DE DONNEE ----------------#
-# creat_Database("database") #Créé la base de donnée des TPs SQL pour faire des test
+# creat_Database("database") #Créé la base de donnée des TPs SQL pour faire des tests
 
 # print_TableFromADatabase("database.db", "emp") #Affiche le contenu d'une table
 

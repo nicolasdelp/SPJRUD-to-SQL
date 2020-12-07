@@ -69,7 +69,7 @@ class Select(SPJRUD):
         Enregistre la requête SQL dans la relation
         """
         if isinstance(self.operation.get_AttributeRight(), Constante):
-            sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + "'" + self.operation.return_NameList()[1] + "'"
+            sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + "'" + str(self.operation.return_NameList()[1]) + "'"
         else:
             sql = "SELECT * FROM (" + self.relation.get_SQL() + ") WHERE " + self.operation.return_NameList()[0] + self.operation.get_Sign() + self.operation.return_NameList()[1]
 

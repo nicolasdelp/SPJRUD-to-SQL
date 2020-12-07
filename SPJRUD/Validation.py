@@ -43,12 +43,20 @@ def valid_Select(param1, param2):
                 attributes.append(att)
         
         if attributes[0].get_Type() != attributes[1].get_Type():
-            raise Exception("SPJRUD -> Select : Le type des arguments n\'est pas compatible")
+            raise Exception("SPJRUD -> Select : Le type des attributs n\'est pas compatible")
     
     if isinstance(param1.get_AttributeRight(), Constante): #quand c'est une constante
-        if not isinstance(param1.get_AttributeRight().get_Value(), type(param1.get_AttributeLeft())):
-            raise Exception("SPJRUD -> Select : Le type des arguments n\'est pas compatible")
+        if isinstance(param1.get_AttributeRight().get_Value(), str) and not (get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() == 'TEXT'):
+            raise Exception("SPJRUD -> Select : Le type des attributs n\'est pas compatible (" + get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() + " != str)")
+        if isinstance(param1.get_AttributeRight().get_Value(), int) and not (get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() == 'INTEGER'):
+            raise Exception("SPJRUD -> Select : Le type des attributs n\'est pas compatible (" + get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() + " != int)")
+        if isinstance(param1.get_AttributeRight().get_Value(), float) and not (get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() == 'REAL'):
+            raise Exception("SPJRUD -> Select : Le type des attributs n\'est pas compatible (" + get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() + " != float)")
 
+def get_AttibuteByName(name, relation):
+    for att in relation.get_Attributes():
+        if att.get_Name() == name:
+            return att
   
 def valid_Project(param1, param2):
     """
