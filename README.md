@@ -44,7 +44,7 @@ Mon implémentation est constitué de 3 "packages", **Ope**, **Representation** 
 
 Ouvrez le fichier `Main.py` à la racine du projet et utilisez les méthodes ci-dessous à l'intérieur :
 
-**INSTANCIER UNE RELATION SOI-MEME**
+**Instancier une relation soi-même**
 
 ```python
 rel = Relation(
@@ -56,13 +56,13 @@ rel = Relation(
             ])
 ```
 
-**INSTANCIER UNE RELATION A PARTIR DE LA TABLE D'UNE BASE DE DONNEE**
+**Instancier une relation à partir de la table d'une base de données**
 
 ```python
 rel = creat_RelationFromDatabase("database.db", "table")
 ```
 
-**INSTANCIER LES OPERATEURS SPJRUD**
+**Instancier les opérateurs SPJRUD**
 
 ```python
 s1 = Select(Equal("attribute3", "Nicolas"), relation)
@@ -89,7 +89,7 @@ u = Union(firstRelation, secondRelation)
 d = Difference(firstRelation, secondRelation)
 ```
 
-**INSTANCIER UN OPERATEUR SPJRUD DE MANIERE RECURSIVE**
+**Instancier un opérateur SPJRUD de manière récursive**
 
 ```python
 a = Project(["name", "sal", "job", "deptno"], firstRelation)
@@ -98,7 +98,7 @@ b = Project(["deptno", "departement", "loc"], Select(Equal("departement", Consta
 j = Join(a, b)
 ```
 
-**AFFICHER L'EXPRESSION SPJRUD A LA CONSOLE**
+**Afficher l'expression SPJRUD dans la console**
 
 ```python
 print(Select(Equal("attribute3", "Nicolas"), relation))
@@ -107,7 +107,7 @@ print(Select(Equal("attribute3", "Nicolas"), relation))
 >> Select(Equal('attribute3', 'Nicolas'), Relation('RelationName'))
 ```
 
-**AFFICHER L'EXPRESSION SQL A LA CONSOLE**
+**Afficher l'expression SQL dans la console**
 
 ```python
 print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
