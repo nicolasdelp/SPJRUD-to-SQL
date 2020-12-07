@@ -40,10 +40,7 @@ La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SP
 
 Une implémentation comme celle-ci permet la modularité de la librairie, il est très simple de rajouter des classes dans chaque "package"
 
-### 5. Mes choix d'implémentation
-
-
-### 6. Utilisation de la librairie
+### 5. Utilisation de la librairie
 
 Ouvrez le fichier `Main.py` à la racine du projet et utilisez les méthodes ci-dessous à l'intérieur :
 
@@ -119,7 +116,7 @@ print(Select(Equal("attribute3", "Nicolas"), relation).get_SQL())
 >> SELECT * FROM (RelationName) WHERE attribute3 = "Nicolas"
 ```
 
-**Exécuter une requête SQL sur une base de données (BDD des TPs)**
+**Exécuter une requête SQL sur une base de données (ici dans BDD des TPs pour l'exemple)**
 
 ```python
 executeSQL_OnDatabase("database.db", Project(["name", "sal", "job", "deptno"], Select(Equal("sal", Constante(5000.0)), Rename("ename", "name", creat_RelationFromDatabase("database.db", "emp")))).get_SQL())
