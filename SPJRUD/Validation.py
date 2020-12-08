@@ -54,6 +54,11 @@ def valid_Select(param1, param2):
             raise Exception("SPJRUD -> Select : Le type des attributs n\'est pas compatible (" + get_AttibuteByName(param1.get_AttributeLeft(), param2).get_Type() + " != float)")
 
 def get_AttibuteByName(name, relation):
+    """
+    Retourne l'attribut d'une relation grâce à au nom de l'attribut
+    - name = le nom de l'attribut
+    - relation = la relation
+    """
     for att in relation.get_Attributes():
         if att.get_Name() == name:
             return att
