@@ -127,7 +127,7 @@ print(s.get_SQL())
 >> SELECT * FROM (RelationName) WHERE attribute3 = "Nicolas"
 ```
 
-**Exécuter une requête SQL sur une base de données (ici dans BDD des TPs pour l'exemple)**
+**Exécuter une requête SQL sur une base de données (ici dans la BDD des TPs pour l'exemple)**
 
 ```python
 rel = creat_RelationFromDatabase("database.db", "emp")
