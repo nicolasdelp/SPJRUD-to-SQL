@@ -4,7 +4,7 @@
 
 ### 1. Présentation du projet
 L’objectif de ce projet est d’implémenter en [Python](https://www.python.org/) un outil de traduction de requêtes SPJRUD vers des requêtes SQL. 
-Il est aussi possible d'exécuter une requête SQL (ayant été traduite d'une requête SPJRUD en amont) sur une base de données grâce à la librairie Python [SQLite](https://docs.python.org/3/library/sqlite3.html).
+Grâce à cet outil, il est dès lors possible d'exécuter une requête SQL (ayant été traduite d'une requête SPJRUD en amont) sur une base de données grâce à la librairie Python [SQLite](https://docs.python.org/3/library/sqlite3.html).
 
 ### 2. SPJRUD c'est quoi ?
 **SPJRUD** est un acronyme pour :
@@ -27,13 +27,13 @@ SQL est un langage informatique normalisé servant à exploiter des bases de don
 ### 4. Organisation de la librairie
 La librairie est constitué de 3 "packages", **Ope**, **Representation** et **SPJRUD** ainsi que 2 fichiers, `sql.py` et `main.py`.
 
-+ **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémenté. Il est très simple d'en rajouter d'autres (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
++ **Ope** : le package Ope représente les opérations possibles pour l'opérateur Select. L'opération "=" (`Equal.py`) a été implémentée. Il est très simple d'en rajouter d'autres (>, <, !=, <>, ...), il suffit juste de créer un objet (héritant de Ope) représentant l'opération.
 
-+ **Representation** : le package Representation représente tout ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constitue la relation, mais aussi une constante qui peut être utilisé avec l'opérateur Select.
++ **Representation** : le package Representation représente tout ce qui est en lien avec une relation, c'est-à-dire la relation en elle-même, les attributs qui constituent la relation, mais aussi une constante qui peut être utilisée avec l'opérateur Select.
 
 + **SPJRUD** : le package SPJRUD représente, comme son nom l'indique, chaque opérateur de l'algèbre relationnelle.
 
-+ `sql.py` : ce fichier contient les méthodes a utiliser lorsque l'on applique les opérateurs SPJRUD sur une base de données.
++ `sql.py` : ce fichier contient les méthodes à utiliser lorsque l'on applique les opérateurs SPJRUD sur une base de données.
 
 + `main.py` : ce fichier est l'entrée de la librairie, c'est ici que l'utilisateur doit instancier ses relations, ses opérateurs SPJRUD et c'est aussi ici qu'il peut utiliser les méthodes s'appliquant à une base de données SQLite.
 
