@@ -22,7 +22,7 @@ class Rename(SPJRUD):
         Constructeur de l'opérateur Rename
         - oldName = le nom de l'attribut cible
         - newName = le nouveau nom de cet attribut
-        - subExpressionRight = une relation
+        - subExpressionRight = une relation ou un SPJRUD
 
         >> Rename(oldName, newName, Relation)
         """

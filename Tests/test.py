@@ -16,30 +16,16 @@ from Representation.Relation import Relation
 # b = Attribute("Attribute", 'TEXT')
 
 # res = Equal(a,b)
-"""
-Exception: Le premier parametre doit etre du type 'Attribute'
-"""
 
 #res = Equal(b, "NotAttributeandNotConsant")
-"""
-Exception: Le deuxieme parametre doit etre du type 'Attribute' ou 'Constante'
-"""
 
 # res = Equal(b,a)
 # for r in res.return_NameList():
 #     print(r)
-"""
-Attribute
-Constante
-"""
 
 # res = Equal(b,b)
 # for r in res.return_NameList():
 #     print(r)
-"""
-Attribute
-Attribute
-"""
 
 
 
@@ -57,9 +43,6 @@ Attribute
 # g = Equal(a, f)
 # h = Equal(b, c)
 # i = Equal(d, f)
-"""
-Exception: Cet attribut n'existe pas dans la relation
-"""
 
 # res1 = Select(g, e)
 # res2 = Select(h, z)

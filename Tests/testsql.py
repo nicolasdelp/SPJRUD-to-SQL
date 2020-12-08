@@ -13,7 +13,7 @@ from Representation.Relation import Relation
 from sql import *
 
 creat_Database("database")
-# print_TableFromADatabase("database.db", "emp")
+print_TableFromADatabase("database.db", "emp")
 
 x = creat_RelationFromDatabase("database.db", "emp2")
 y = creat_RelationFromDatabase("database.db", "emp")

@@ -16,10 +16,10 @@ class Relation:
         Constructeur d'une relation
         - relation_name = le nom de la relation
         - list_attributes = la liste d'attributs de la relation
-        - SPJRUD = l'expression SPJRUD de la relation
+        - SPJRUD = l'expression SPJRUD de la relation (optionnel)
 
         >> Relation("nomdelarelation", [a, b, c, d])
-        >> Relation("nomdelarelation", [a, b, c, d], SPJRUD="Join(relation1, relation2))
+        >> Relation("nomdelarelation", [a, b, c, d], SPJRUD="Join(relation1, relation2)")
         """
         self.SQL = []
         self.set_Name(relation_name)
@@ -68,7 +68,7 @@ class Relation:
 
     def get_Attributes(self):
         """
-        Retourne les attributs de la relation
+        Retourne la liste d'attributs de la relation
         """
         return self.list_attributes
 

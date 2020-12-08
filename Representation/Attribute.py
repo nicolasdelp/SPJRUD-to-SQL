@@ -61,6 +61,7 @@ class Attribute:
     def isComparable(self, otherAttribute):
         """
         Vérifie si 2 attributs sont comparables
+        - otherAttribute : l'autre attribut
         """
         if not isinstance(otherAttribute, Attribute):
             raise Exception("Attribute : Le parametre doit etre du type \'Attribute\'")

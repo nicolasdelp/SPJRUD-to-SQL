@@ -18,8 +18,8 @@ class Union(SPJRUD):
     def __init__(self, subExpressionLeft, subExpressionRight):
         """
         Constructeur de l'opérateur Union
-        - subExpressionLeft = une relation
-        - subExpressionRight = une relation
+        - subExpressionLeft = une relation ou un SPJRUD
+        - subExpressionRight = une relation ou un SPJRUD
 
         >> Union(Relation, Relation)
         """

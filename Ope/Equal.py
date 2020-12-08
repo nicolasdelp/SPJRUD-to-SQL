@@ -62,7 +62,7 @@ class Equal(Ope):
 
     def return_NameList(self):
         """
-        Méthode qui retourne une liste pour permettre à l'opérateur l'utilisant d'agir
+        Méthode qui retourne une liste pour permettre à l'opérateur SPJRUD qui l'utilise d'agir
         """
         if isinstance(self.attributeRight, Constante):
             return [self.attributeLeft, self.attributeRight.get_Value()]

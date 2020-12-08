@@ -19,7 +19,7 @@ class Project(SPJRUD):
         """
         Constructeur de l'opérateur Project
         - listOfParameters = une liste de paramètres (string) à projeter
-        - subExpressionRight = une relation
+        - subExpressionRight = une relation ou un SPJRUD
 
         >> Project(['Param1', 'Param2', ...], Relation)
         """

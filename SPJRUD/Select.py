@@ -22,7 +22,7 @@ class Select(SPJRUD):
         """
         Constructeur de l'opérateur Select
         - subExpressionLeft = une opération entre 2 termes (une égalité par exemple)
-        - subExpressionRight = une relation
+        - subExpressionRight = une relation ou un SPJRUD
 
         >> Select(Equal('Param1', 'Param2'), Relation)
         """
