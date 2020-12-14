@@ -1,4 +1,4 @@
-from SPJRUD.SPJRUD import SPJRUD
+from SPJRUD import SPJRUD
 from SPJRUD.Select import Select
 from SPJRUD.Project import Project
 from SPJRUD.Join import Join
