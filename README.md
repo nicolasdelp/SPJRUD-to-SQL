@@ -53,7 +53,7 @@ rel = Relation(
             [
                 Attribute("attribute1", 'INTEGER'), 
                 Attribute("attribute2", 'REAL'), 
-                Attribute("attribute3", 'TEXT'),
+                Attribute("attribute3", 'TEXT')
             ])
 ```
 

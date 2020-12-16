@@ -12,6 +12,8 @@ from Representation.Relation import Relation
 
 from sql import *
 
+#Sur une base de donnée
+
 creat_Database("database")
 print_TableFromADatabase("database.db", "emp")
 
@@ -69,5 +71,59 @@ print(i)
 print(i.get_SQL())
 print("--------------------------------------------------------------")
 
-
 executeSQL_OnDatabase("database.db", i.get_SQL())
+
+#Sur une relation créée moi-même
+
+rel = Relation(
+        "Personne", 
+            [
+                Attribute("id", 'INTEGER'), 
+                Attribute("nom", 'TEXT'), 
+                Attribute("prenom", 'TEXT')
+            ])
+
+rel2 = Relation(
+        "Infos_Personne", 
+            [
+                Attribute("id", 'INTEGER'), 
+                Attribute("sexe", 'TEXT'), 
+                Attribute("age", 'INTEGER'),
+                Attribute("taille", 'REAL'),
+                Attribute("poids", 'REAL')
+            ])
+
+a = Select(Equal("nom", "prenom"), rel)
+print(a)
+print(a.get_SQL())
+print("--------------------------------------------------------------")
+
+b = Project(["id", "nom", "prenom"], rel)
+print(b)
+print(b.get_SQL())
+print("--------------------------------------------------------------")
+
+bb = Project(["id", "sexe", "age"], rel2)
+print(bb)
+print(bb.get_SQL())
+print("--------------------------------------------------------------")
+
+c = Join(b, bb)
+print(c)
+print(c.get_SQL())
+print("--------------------------------------------------------------")
+
+d = Rename("nom", "Name", rel)
+print(d)
+print(d.get_SQL())
+print("--------------------------------------------------------------")
+
+g = Join(Project(["id", "nom", "prenom"], Select(Equal("nom", Constante("DELPLANQUE")), rel)), rel2)
+print(g)
+print(g.get_SQL())
+print("--------------------------------------------------------------")
+
+h = Select(Equal("NomDeFamille", Constante("DELPLANQUE")),  Rename("nom", "NomDeFamille", rel))
+print(h)
+print(h.get_SQL())
+print("--------------------------------------------------------------")
