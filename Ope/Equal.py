@@ -8,9 +8,6 @@ from Ope.Ope import Ope
 from Representation.Attribute import Attribute
 from Representation.Constante import Constante
 
-import sys
-sys.tracebacklimit = 0
-
 class Equal(Ope):
     
     def __init__(self, attributeLeft, attributeRight):

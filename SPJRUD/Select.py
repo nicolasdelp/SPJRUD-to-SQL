@@ -13,9 +13,6 @@ from Representation.Constante import Constante
 
 from SPJRUD.Validation import *
 
-import sys
-sys.tracebacklimit = 0
-
 class Select(SPJRUD):
 
     def __init__(self, subExpressionLeft, subExpressionRight):

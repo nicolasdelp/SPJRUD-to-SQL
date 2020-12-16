@@ -10,9 +10,6 @@ from Representation.Attribute import Attribute
 
 from SPJRUD.Validation import *
 
-import sys
-sys.tracebacklimit = 0
-
 class Difference(SPJRUD):
 
     def __init__(self, subExpressionLeft, subExpressionRight):

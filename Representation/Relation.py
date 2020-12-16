@@ -6,9 +6,6 @@ __email__ = "nicolas.delplanque@student.umons.ac.be"
 
 from Representation.Attribute import Attribute
 
-import sys
-sys.tracebacklimit = 0
-
 class Relation:
 
     def __init__(self, relation_name, list_attributes, SPJRUD=""):

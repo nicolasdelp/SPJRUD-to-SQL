@@ -21,9 +21,6 @@ from Representation.Relation import Relation
 import sqlite3
 import os
 
-import sys
-sys.tracebacklimit = 0
-
 def creat_Database(name):
     """
     Création d'une base de donnée automatiquement rempli avec 3 tables (emp, dept, salgrade)

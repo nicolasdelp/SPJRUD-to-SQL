@@ -12,9 +12,6 @@ from Representation.Attribute import Attribute
 
 from SPJRUD.Validation import *
 
-import sys
-sys.tracebacklimit = 0
-
 class Rename(SPJRUD):
 
     def __init__(self, oldName, newName, subExpressionRight):

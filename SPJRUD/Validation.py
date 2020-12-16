@@ -11,9 +11,6 @@ from Representation.Relation import Relation
 from Representation.Attribute import Attribute
 from Representation.Constante import Constante
 
-import sys
-sys.tracebacklimit = 0
-
 def valid_Select(param1, param2):
     """
     Vérifications pour l'opérateur Select dans SPJRUD
